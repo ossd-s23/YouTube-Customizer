@@ -1,0 +1,67 @@
+html, body {
+    width: 500px;
+    font-family: Roboto, sans-serif;
+}
+
+.tabs {
+    border: 1px solid #cccccc;
+    height: 300px;
+    display: flex;
+}
+
+.tabs_sidebar {
+    width: 125px;
+    flex-shrink: 0;
+    background: #cccccc;
+}
+
+.tabs_button {
+    display: block;
+    padding: 10px;
+    background: #eeeeee;
+    border: none;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+}
+
+.tabs_button:active {
+    background: #dddddd;
+}
+
+.tabs_button:not(:last-of-type) {
+    border-bottom: 1px solid #cccccc;
+}
+
+.tabs_button--active {
+    font-weight: bold;
+    border-right: 3px solid #e85b5b;
+    background: #dddddd;
+}
+
+.tabs_content {
+    padding: 15px;
+    font-size: 0.8rem;
+    display: none;
+}
+
+.tabs_content--active {
+    display: block;
+}
+
+.tabs_content > :first-child {
+    margin-top: 0;
+}
+
+.box {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.box div a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.2rem;
+}

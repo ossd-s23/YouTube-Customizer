@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="options.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <h4>
+        <u>Customize YouTube Interface</u>
+        <span style="float: right;">
+            <img src="../icons/icon-16.png" style="width: 20px; height: 20px;">
+            &nbsp;&nbsp;
+        </span>
+    </h4>
+
+    <div class="tabs">
+        <div class="tabs_sidebar">
+            <button class="tabs_button" data-for-tab="navbar">Navigation Bar</button>
+            <button class="tabs_button" data-for-tab="vidplayer">Video Player</button>
+        </div>
+        <div class="tabs_content" data-tab="navbar">
+            <h4>Hide Buttons and Sections</h4>
+            <input type="checkbox" id="hide-navbar-all">
+            <label for="hide-navbar-all">Hide the entire navigation bar</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-home">
+            <label for="hide-navbar-home">Hide the Home button</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-shorts">
+            <label for="hide-navbar-shorts">Hide the Shorts button</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-sub">
+            <label for="hide-navbar-sub">Hide the Subscriptions button</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-libsec">
+            <label for="hide-navbar-libsec">Hide the Library ++ section</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-subsec">
+            <label for="hide-navbar-subsec">Hide the Subscriptions section</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-explore">
+            <label for="hide-navbar-explore">Hide the Explore section</label>
+            <br>
+            <input type="checkbox" id="hide-navbar-more">
+            <label for="hide-navbar-more">Hide the More from YouTube section</label>
+        </div>
+        <div class="tabs_content" data-tab="vidplayer">
+            <code>To be done...</code>
+        </div>
+    </div>
+
+    <div class="box">
+        <div><a href=""><i class="fa fa-info"></i></a>&nbsp;Information</div>
+        <div><a href=""><i class="fa fa-github"></i></a>&nbsp;Repository</div>
+        <div><a href=""><i class="fa fa-file"></i></a>&nbsp;Feedback</div>
+        <div><a href=""><i class="fa fa-refresh"></i></a>&nbsp;Refresh</div>
+    </div>
+
+    <script src="options.js"></script>
+
+</body>
+</html>
