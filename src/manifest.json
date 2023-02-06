@@ -3,8 +3,8 @@
     "name": "YouTube Interface Customizer",
     "version": "1.0",
 
-    "description": "Customize your YouTube interface in your favorable style.",
-    "homepage_url": "https://github.com/ossd-s23",
+    "description": "Customize the YouTube interface in your favorable style.",
+    "homepage_url": "https://github.com/ossd-s23/YouTube-Customizer",
     "icons": {
         "16": "icons/icon-16.png",
         "32": "icons/icon-32.png",
