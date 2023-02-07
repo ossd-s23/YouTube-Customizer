@@ -12,7 +12,7 @@ html, body {
 .tabs_sidebar {
     width: 125px;
     flex-shrink: 0;
-    background: #cccccc;
+    background: #eeeeee;
 }
 
 .tabs_button {
@@ -63,5 +63,8 @@ html, body {
 .box div a {
     text-decoration: none;
     color: #000000;
+}
+
+.box div i {
     font-size: 1.2rem;
 }

@@ -25,9 +25,6 @@
         else if (message.command === "remove_css") {
             removeCSS(message.description);
         }
-        else {
-            alert("message.command: Out of scope")
-        }
     });
 
 })();
