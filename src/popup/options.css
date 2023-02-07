@@ -43,6 +43,8 @@ html, body {
     padding: 15px;
     font-size: 0.8rem;
     display: none;
+    overflow: scroll;
+    width: 375px;
 }
 
 .tabs_content--active {

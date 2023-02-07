@@ -6,6 +6,42 @@
 
 // =================== NAVIGATION BAR ==================== //
 
+function CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color) { return `
+    html a[title="Home"][href="/"] yt-formatted-string,
+    html a[title="Home"][href="/"] yt-icon.guide-icon,
+    html a[title="Home"][href="/"] span.title,
+    html a[href="/feed/trending"] yt-formatted-string,
+    html a[href="/feed/trending"] yt-icon.guide-icon,
+    html a[href="/feed/trending"] span.title,
+    html a[href="/feed/explore"] yt-formatted-string,
+    html a[href="/feed/explore"] yt-icon.guide-icon,
+    html a[href="/feed/explore"] span.title,
+    html a[title="Shorts"] yt-formatted-string,
+    html a[title="Shorts"] yt-icon.guide-icon,
+    html a[title="Shorts"] span.title,
+    html a[title="Subscriptions"][href="/feed/subscriptions"] yt-formatted-string,
+    html a[title="Subscriptions"][href="/feed/subscriptions"] yt-icon.guide-icon,
+    html a[title="Subscriptions"][href="/feed/subscriptions"] span.title,
+    html ytd-guide-collapsible-section-entry-renderer yt-formatted-string,
+    html ytd-guide-collapsible-section-entry-renderer yt-icon.guide-icon,
+    html ytd-guide-collapsible-section-entry-renderer span.title,
+    html a[title="Library"][href="/feed/library"] yt-formatted-string,
+    html a[title="Library"][href="/feed/library"] yt-icon.guide-icon,
+    html a[title="Library"][href="/feed/library"] span.title,
+    html ytd-guide-section-renderer[rys_sub_section] yt-formatted-string,
+    html ytd-guide-section-renderer[rys_sub_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[rys_sub_section] span.title,
+    html ytd-guide-section-renderer[rys_explore_section] yt-formatted-string,
+    html ytd-guide-section-renderer[rys_explore_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[rys_explore_section] span.title,
+    html ytd-guide-section-renderer[rys_more_section] yt-formatted-string,
+    html ytd-guide-section-renderer[rys_more_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[rys_more_section] span.title,
+    html ytd-guide-section-renderer[rys_hidden_section] yt-formatted-string,
+    html ytd-guide-section-renderer[rys_hidden_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[rys_hidden_section] span.title 
+    { color: ${color} !important; }
+`;}
 const CSS_SCRIPT_HIDE_NAVBAR_ALL = `
     html tp-yt-app-drawer#guide,
     html yt-icon-button#guide-button,
@@ -30,7 +66,8 @@ const CSS_SCRIPT_HIDE_NAVBAR_SUB = `
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_QUICKLINKS = `
-    html ytd-guide-collapsible-section-entry-renderer
+    html ytd-guide-collapsible-section-entry-renderer,
+    html a[title="Library"][href="/feed/library"]
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_SUBSEC = `
@@ -63,6 +100,8 @@ const CSS_SCRIPT_HIDE_NAVBAR_FOOTER = `
 function memorizeStates() {
 
     // =================== NAVIGATION BAR ==================== //
+    browser.storage.local.get({change_color_navbar_text_state: ""})
+        .then(result => document.getElementById("change-color-navbar-text").value = result.change_color_navbar_text_state);
     browser.storage.local.get({hide_navbar_all_state: ""})
         .then(result => document.getElementById("hide-navbar-all").checked = !!result.hide_navbar_all_state);
     browser.storage.local.get({hide_navbar_home_state: ""})
@@ -102,6 +141,21 @@ function listenForClicks() {
         // TODO: Possibly need to change usage of tabs API
 
         // =================== NAVIGATION BAR ==================== //
+
+        function changeColorNavbarText(tabs, color) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-change-color-navbar-text",
+                css_script: CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color),
+            });
+        }
+        function cancelChangeColorNavbarText(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-change-color-navbar-text",
+                css_script: "",
+            });
+        }
 
         function hideNavbarAll(tabs) {
             browser.tabs.sendMessage(tabs[0].id, {
@@ -277,7 +331,13 @@ function listenForClicks() {
 
         // =================== NAVIGATION BAR ==================== //
 
-        if (event.target.id === "hide-navbar-all") {
+        if (event.target.id === "change-color-navbar-text") {
+            var m = event.target.value;
+            browser.storage.local.set({change_color_navbar_text_state: m});
+            if (m === "default") browser.tabs.query({active: true, currentWindow: true}).then(cancelChangeColorNavbarText).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => changeColorNavbarText(tabs, m)).catch(reportError);
+        }
+        else if (event.target.id === "hide-navbar-all") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_all_state: m});
             if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarAll).catch(reportError);
