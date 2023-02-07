@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="options.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="options.js"></script>
+    <script src="select_options.js"></script>
 </head>
 <body>
 
@@ -22,7 +24,7 @@
         </div>
         <div class="tabs_content" data-tab="navbar">
             <h4>Hide Buttons and Sections</h4>
-            <input type="checkbox" id="hide-navbar-all">
+            <input type="checkbox" id="hide-navbar-all" onclick="validate()">
             <label for="hide-navbar-all">Hide the entire navigation bar</label>
             <br>
             <input type="checkbox" id="hide-navbar-home">
@@ -56,8 +58,6 @@
         <div><a href="https://github.com/ossd-s23/YouTube-Customizer"><i class="fa fa-github"></i></a>&nbsp;Repository</div>
         <div><a href=""><i class="fa fa-file"></i></a>&nbsp;Feedback</div>
     </div>
-
-    <script src="options.js"></script>
 
 </body>
 </html>

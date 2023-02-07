@@ -16,7 +16,18 @@
     },
 
     "permissions": [
+        "storage",
         "*://*.youtube.com/*"
+    ],
+
+    "content_scripts": [
+        {
+            "js": ["content_scripts/main.js"],
+            "css": ["css/main.css"],
+            "all_frames": true,
+            "matches": ["*://*.youtube.com/*"],
+            "run_at": "document_start"
+        }
     ],
 
     "browser_action": {
