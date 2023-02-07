@@ -41,7 +41,7 @@ function CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color) { return `
     html ytd-guide-section-renderer[rys_hidden_section] yt-icon.guide-icon,
     html ytd-guide-section-renderer[rys_hidden_section] span.title 
     { color: ${color} !important; }
-`;}
+`; }
 const CSS_SCRIPT_HIDE_NAVBAR_ALL = `
     html tp-yt-app-drawer#guide,
     html yt-icon-button#guide-button,
@@ -102,6 +102,8 @@ function memorizeStates() {
     // =================== NAVIGATION BAR ==================== //
     browser.storage.local.get({change_color_navbar_text_state: ""})
         .then(result => document.getElementById("change-color-navbar-text").value = result.change_color_navbar_text_state);
+    browser.storage.local.get({icon_redirect_navbar_state: ""})
+        .then(result => document.getElementById("icon-redirect-navbar").value = result.icon_redirect_navbar_state);
     browser.storage.local.get({hide_navbar_all_state: ""})
         .then(result => document.getElementById("hide-navbar-all").checked = !!result.hide_navbar_all_state);
     browser.storage.local.get({hide_navbar_home_state: ""})
@@ -154,6 +156,13 @@ function listenForClicks() {
                 command: "remove_css",
                 description: "css-script-change-color-navbar-text",
                 css_script: "",
+            });
+        }
+
+        function iconRedirectNavbar(tabs, url) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "i_icon_redirect_navbar",
+                url: url,
             });
         }
 
@@ -336,6 +345,11 @@ function listenForClicks() {
             browser.storage.local.set({change_color_navbar_text_state: m});
             if (m === "default") browser.tabs.query({active: true, currentWindow: true}).then(cancelChangeColorNavbarText).catch(reportError);
             else browser.tabs.query({active: true, currentWindow: true}).then(tabs => changeColorNavbarText(tabs, m)).catch(reportError);
+        }
+        else if (event.target.id === "icon-redirect-navbar") {
+            var m = event.target.value;
+            browser.storage.local.set({icon_redirect_navbar_state: m});
+            browser.tabs.query({active: true, currentWindow: true}).then(tabs => iconRedirectNavbar(tabs, m)).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-all") {
             var m = event.target.checked;

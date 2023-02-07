@@ -4,6 +4,8 @@
     if (window.hasRun) return;
     window.hasRun = true;
 
+    var iconRedirectNavbarURL = "https://www.youtube.com/";
+
     // Insert CSS script into the page with id as the specified description
     // Modify on existence of corresponding style sheet, create otherwise
     function insertCSSScript(css_script, description) {
@@ -42,10 +44,20 @@
             counter ++;
         });
 
-        // Listen to messages
+        // Listen to messages from popup window
         if (message.command === "insert_css") insertCSSScript(message.css_script, message.description);
         else if (message.command === "remove_css") removeCSSScript(message.description);
-        
+        else if (message.command === "i_icon_redirect_navbar") iconRedirectNavbarURL = message.url;
+
+        // Overwrite YouTube logo icon redirection
+        const youtubeIcons = document.querySelectorAll("a#logo");
+        youtubeIcons.forEach(icon => {
+            icon.addEventListener("click", (event) => {
+                event.preventDefault();
+                window.location = iconRedirectNavbarURL;
+            });
+        });
+
     });
 
 })();
