@@ -28,18 +28,18 @@ function CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color) { return `
     html a[title="Library"][href="/feed/library"] yt-formatted-string,
     html a[title="Library"][href="/feed/library"] yt-icon.guide-icon,
     html a[title="Library"][href="/feed/library"] span.title,
-    html ytd-guide-section-renderer[rys_sub_section] yt-formatted-string,
-    html ytd-guide-section-renderer[rys_sub_section] yt-icon.guide-icon,
-    html ytd-guide-section-renderer[rys_sub_section] span.title,
-    html ytd-guide-section-renderer[rys_explore_section] yt-formatted-string,
-    html ytd-guide-section-renderer[rys_explore_section] yt-icon.guide-icon,
-    html ytd-guide-section-renderer[rys_explore_section] span.title,
-    html ytd-guide-section-renderer[rys_more_section] yt-formatted-string,
-    html ytd-guide-section-renderer[rys_more_section] yt-icon.guide-icon,
-    html ytd-guide-section-renderer[rys_more_section] span.title,
-    html ytd-guide-section-renderer[rys_hidden_section] yt-formatted-string,
-    html ytd-guide-section-renderer[rys_hidden_section] yt-icon.guide-icon,
-    html ytd-guide-section-renderer[rys_hidden_section] span.title 
+    html ytd-guide-section-renderer[ossd_sub_section] yt-formatted-string,
+    html ytd-guide-section-renderer[ossd_sub_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[ossd_sub_section] span.title,
+    html ytd-guide-section-renderer[ossd_explore_section] yt-formatted-string,
+    html ytd-guide-section-renderer[ossd_explore_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[ossd_explore_section] span.title,
+    html ytd-guide-section-renderer[ossd_more_section] yt-formatted-string,
+    html ytd-guide-section-renderer[ossd_more_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[ossd_more_section] span.title,
+    html ytd-guide-section-renderer[ossd_hidden_section] yt-formatted-string,
+    html ytd-guide-section-renderer[ossd_hidden_section] yt-icon.guide-icon,
+    html ytd-guide-section-renderer[ossd_hidden_section] span.title 
     { color: ${color} !important; }
 `; }
 const CSS_SCRIPT_HIDE_NAVBAR_ALL = `
@@ -71,25 +71,44 @@ const CSS_SCRIPT_HIDE_NAVBAR_QUICKLINKS = `
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_SUBSEC = `
-    html ytd-guide-section-renderer[rys_sub_section]
+    html ytd-guide-section-renderer[ossd_sub_section]
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_EXPLORESEC = `
-    html ytd-guide-section-renderer[rys_explore_section]
+    html ytd-guide-section-renderer[ossd_explore_section]
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_MORE = `
-    html ytd-guide-section-renderer[rys_more_section]
+    html ytd-guide-section-renderer[ossd_more_section]
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_SETTINGS = `
-    html ytd-guide-section-renderer[rys_hidden_section]
+    html ytd-guide-section-renderer[ossd_hidden_section]
     { display: none !important; }
 `;
 const CSS_SCRIPT_HIDE_NAVBAR_FOOTER = `
     html div#footer.ytd-guide-renderer
     { display: none !important; }
 `;
+
+// ====================== HOMEPAGE ======================= //
+
+const CSS_SCRIPT_HIDE_HOMEPAGE_ALL = `
+    html ytd-browse[page-subtype="home"]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_NEWS = `
+    html ytd-rich-section-renderer[ossd_homepage_news_section]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS = `
+    html ytd-rich-section-renderer[ossd_homepage_shorts_section]
+    { display: none !important; }
+`;
+
+// ==================== VIDEO PLAYER ===================== //
+
+
 
 // ========== =========== ========== ========== ========== //
 //                                                         //
@@ -100,6 +119,7 @@ const CSS_SCRIPT_HIDE_NAVBAR_FOOTER = `
 function memorizeStates() {
 
     // =================== NAVIGATION BAR ==================== //
+
     browser.storage.local.get({change_color_navbar_text_state: ""})
         .then(result => document.getElementById("change-color-navbar-text").value = result.change_color_navbar_text_state);
     browser.storage.local.get({icon_redirect_navbar_state: ""})
@@ -126,6 +146,19 @@ function memorizeStates() {
         .then(result => document.getElementById("hide-navbar-settings").checked = !!result.hide_navbar_settings_state);
     browser.storage.local.get({hide_navbar_footer_state: ""})
         .then(result => document.getElementById("hide-navbar-footer").checked = !!result.hide_navbar_footer_state);
+
+    // ====================== HOMEPAGE ======================= //
+
+    browser.storage.local.get({hide_homepage_all_state: ""})
+        .then(result => document.getElementById("hide-homepage-all").checked = !!result.hide_homepage_all_state);
+    browser.storage.local.get({hide_homepage_news_state: ""})
+        .then(result => document.getElementById("hide-homepage-news").checked = !!result.hide_homepage_news_state);
+    browser.storage.local.get({hide_homepage_shorts_state: ""})
+        .then(result => document.getElementById("hide-homepage-shorts").checked = !!result.hide_homepage_shorts_state);
+
+    // ==================== VIDEO PLAYER ===================== //
+
+
 
 }
 
@@ -331,6 +364,58 @@ function listenForClicks() {
             });
         }
 
+        // ====================== HOMEPAGE ======================= //
+
+        function hideHomepageAll(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-all",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
+            });
+        }
+        function unhideHomepageAll(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-all",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
+            });
+        }
+
+        function hideHomepageNews(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-news",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
+            });
+        }
+        function unhideHomepageNews(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-news",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
+            });
+        }
+
+        function hideHomepageShorts(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-shorts",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
+            });
+        }
+        function unhideHomepageShorts(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-shorts",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
+            });
+        }
+
+        // ==================== VIDEO PLAYER ===================== //
+
+
+
+
         // ========== =========== ========== ========== ========== //
         //                                                         //
         //            DECLARING CUSTOMIZATION TRIGGERS             //
@@ -417,6 +502,32 @@ function listenForClicks() {
             if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarFooter).catch(reportError);
             else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarFooter).catch(reportError);
         }
+
+        // ====================== HOMEPAGE ======================= //
+
+        else if (event.target.id === "hide-homepage-all") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_all_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAll).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAll).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-news") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_news_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageNews).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageNews).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-shorts") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_shorts_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageShorts).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageShorts).catch(reportError);
+        }
+
+        // ==================== VIDEO PLAYER ===================== //
+
+
+
 
     });
 }
