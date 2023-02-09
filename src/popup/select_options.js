@@ -4,6 +4,46 @@
 //                                                         //
 // ========== =========== ========== ========== ========== //
 
+// ====================== HOMEPAGE ======================= //
+
+const CSS_SCRIPT_HIDE_HOMEPAGE_ALL = `
+    html ytd-browse[page-subtype="home"]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_AD = `
+    html ytd-ad-slot-renderer
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_NEWS = `
+    html ytd-rich-section-renderer[ossd_homepage_news_section]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS = `
+    html ytd-rich-section-renderer[ossd_homepage_shorts_section]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME = `
+    html ytd-rich-section-renderer[ossd_homepage_primetime_section]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS = `
+    html ytd-rich-section-renderer
+    { display: none !important; }
+`;
+function CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num) { return `
+    html ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents > ytd-rich-grid-row:nth-of-type(n+${num})
+    { display: none !important; }
+`; }
+const CSS_SCRIPT_HIDE_HOMEPAGE_HEADER = `
+    ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > div#header
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS = `
+    html ytd-thumbnail,
+    html #media-container.ytd-display-ad-renderer
+    { display: none !important; }
+`;
+
 // =================== NAVIGATION BAR ==================== //
 
 function CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color) { return `
@@ -91,42 +131,6 @@ const CSS_SCRIPT_HIDE_NAVBAR_FOOTER = `
     { display: none !important; }
 `;
 
-// ====================== HOMEPAGE ======================= //
-
-const CSS_SCRIPT_HIDE_HOMEPAGE_ALL = `
-    html ytd-browse[page-subtype="home"]
-    { display: none !important; }
-`;
-const CSS_SCRIPT_HIDE_HOMEPAGE_AD = `
-    html ytd-ad-slot-renderer
-    { display: none !important; }
-`;
-const CSS_SCRIPT_HIDE_HOMEPAGE_NEWS = `
-    html ytd-rich-section-renderer[ossd_homepage_news_section]
-    { display: none !important; }
-`;
-const CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS = `
-    html ytd-rich-section-renderer[ossd_homepage_shorts_section]
-    { display: none !important; }
-`;
-const CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME = `
-    html ytd-rich-section-renderer[ossd_homepage_primetime_section]
-    { display: none !important; }
-`;
-const CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS = `
-    html ytd-rich-section-renderer
-    { display: none !important; }
-`;
-function CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num) { return `
-    html ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents > ytd-rich-grid-row:nth-of-type(n+${num})
-    { display: none !important; }
-`; }
-const CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS = `
-    html ytd-thumbnail,
-    html #media-container.ytd-display-ad-renderer
-    { display: none !important; }
-`;
-
 // ==================== VIDEO PLAYER ===================== //
 
 
@@ -138,6 +142,27 @@ const CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS = `
 // ========== =========== ========== ========== ========== //
 
 function memorizeStates() {
+
+    // ====================== HOMEPAGE ======================= //
+
+    browser.storage.local.get({hide_homepage_all_state: ""})
+        .then(result => document.getElementById("hide-homepage-all").checked = !!result.hide_homepage_all_state);
+    browser.storage.local.get({hide_homepage_ad_state: ""})
+        .then(result => document.getElementById("hide-homepage-ad").checked = !!result.hide_homepage_ad_state);
+    browser.storage.local.get({hide_homepage_news_state: ""})
+        .then(result => document.getElementById("hide-homepage-news").checked = !!result.hide_homepage_news_state);
+    browser.storage.local.get({hide_homepage_shorts_state: ""})
+        .then(result => document.getElementById("hide-homepage-shorts").checked = !!result.hide_homepage_shorts_state);
+    browser.storage.local.get({hide_homepage_primetime_state: ""})
+        .then(result => document.getElementById("hide-homepage-primetime").checked = !!result.hide_homepage_primetime_state);
+    browser.storage.local.get({hide_homepage_specialsecs_state: ""})
+        .then(result => document.getElementById("hide-homepage-specialsecs").checked = !!result.hide_homepage_specialsecs_state);
+    browser.storage.local.get({hide_homepage_suggestions_rows_state: ""})
+        .then(result => document.getElementById("hide-homepage-suggestions-rows").value = result.hide_homepage_suggestions_rows_state);
+    browser.storage.local.get({hide_homepage_header_state: ""})
+        .then(result => document.getElementById("hide-homepage-header").checked = !!result.hide_homepage_header_state);
+    browser.storage.local.get({hide_homepage_thumbnails_state: ""})
+        .then(result => document.getElementById("hide-homepage-thumbnails").checked = !!result.hide_homepage_thumbnails_state);
 
     // =================== NAVIGATION BAR ==================== //
 
@@ -168,25 +193,6 @@ function memorizeStates() {
     browser.storage.local.get({hide_navbar_footer_state: ""})
         .then(result => document.getElementById("hide-navbar-footer").checked = !!result.hide_navbar_footer_state);
 
-    // ====================== HOMEPAGE ======================= //
-
-    browser.storage.local.get({hide_homepage_all_state: ""})
-        .then(result => document.getElementById("hide-homepage-all").checked = !!result.hide_homepage_all_state);
-    browser.storage.local.get({hide_homepage_ad_state: ""})
-        .then(result => document.getElementById("hide-homepage-ad").checked = !!result.hide_homepage_ad_state);
-    browser.storage.local.get({hide_homepage_news_state: ""})
-        .then(result => document.getElementById("hide-homepage-news").checked = !!result.hide_homepage_news_state);
-    browser.storage.local.get({hide_homepage_shorts_state: ""})
-        .then(result => document.getElementById("hide-homepage-shorts").checked = !!result.hide_homepage_shorts_state);
-    browser.storage.local.get({hide_homepage_primetime_state: ""})
-        .then(result => document.getElementById("hide-homepage-primetime").checked = !!result.hide_homepage_primetime_state);
-    browser.storage.local.get({hide_homepage_specialsecs_state: ""})
-        .then(result => document.getElementById("hide-homepage-specialsecs").checked = !!result.hide_homepage_specialsecs_state);
-    browser.storage.local.get({hide_homepage_suggestions_rows_state: ""})
-        .then(result => document.getElementById("hide-homepage-suggestions-rows").value = result.hide_homepage_suggestions_rows_state);
-    browser.storage.local.get({hide_homepage_thumbnails_state: ""})
-        .then(result => document.getElementById("hide-homepage-thumbnails").checked = !!result.hide_homepage_thumbnails_state);
-
     // ==================== VIDEO PLAYER ===================== //
 
 
@@ -205,6 +211,143 @@ function listenForClicks() {
         //                                                         //
         // ========== =========== ========== ========== ========== //
         // TODO: Possibly need to change usage of tabs API
+    
+        // ====================== HOMEPAGE ======================= //
+
+        function hideHomepageAll(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-all",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
+            });
+        }
+        function unhideHomepageAll(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-all",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
+            });
+        }
+
+        function hideHomepageAd(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-ad",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
+            });
+        }
+        function unhideHomepageAd(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-ad",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
+            });
+        }
+
+        function hideHomepageNews(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-news",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
+            });
+        }
+        function unhideHomepageNews(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-news",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
+            });
+        }
+
+        function hideHomepageShorts(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-shorts",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
+            });
+        }
+        function unhideHomepageShorts(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-shorts",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
+            });
+        }
+
+        function hideHomepagePrimetime(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-primetime",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
+            });
+        }
+        function unhideHomepagePrimetime(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-primetime",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
+            });
+        }
+
+        function hideHomepageSpecialsecs(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-specialsecs",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
+            });
+        }
+        function unhideHomepageSpecialsecs(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-specialsecs",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
+            });
+        }
+
+        function hideHomepageSuggestionsRows(tabs, num) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-suggestions-rows",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num),
+            });
+        }
+        function cancelHideHomepageSuggestionsRows(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-suggestions-rows",
+                css_script: "",
+            });
+        }
+
+        function hideHomepageHeader(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-header",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_HEADER,
+            });
+        }
+        function unhideHomepageHeader(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-header",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_HEADER,
+            });
+        }
+
+        function hideHomepageThumbnails(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-thumbnails",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
+            });
+        }
+        function unhideHomepageThumbnails(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-thumbnails",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
+            });
+        }
 
         // =================== NAVIGATION BAR ==================== //
 
@@ -395,128 +538,6 @@ function listenForClicks() {
             });
         }
 
-        // ====================== HOMEPAGE ======================= //
-
-        function hideHomepageAll(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-all",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
-            });
-        }
-        function unhideHomepageAll(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-all",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
-            });
-        }
-
-        function hideHomepageAd(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-ad",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
-            });
-        }
-        function unhideHomepageAd(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-ad",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
-            });
-        }
-
-        function hideHomepageNews(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-news",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
-            });
-        }
-        function unhideHomepageNews(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-news",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
-            });
-        }
-
-        function hideHomepageShorts(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-shorts",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
-            });
-        }
-        function unhideHomepageShorts(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-shorts",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
-            });
-        }
-
-        function hideHomepagePrimetime(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-primetime",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
-            });
-        }
-        function unhideHomepagePrimetime(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-primetime",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
-            });
-        }
-
-        function hideHomepageSpecialsecs(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-specialsecs",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
-            });
-        }
-        function unhideHomepageSpecialsecs(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-specialsecs",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
-            });
-        }
-
-        function hideHomepageSuggestionsRows(tabs, num) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-suggestions-rows",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num),
-            });
-        }
-        function cancelHideHomepageSuggestionsRows(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-suggestions-rows",
-                css_script: "",
-            });
-        }
-
-        function hideHomepageThumbnails(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-thumbnails",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
-            });
-        }
-        function unhideHomepageThumbnails(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-thumbnails",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
-            });
-        }
-
         // ==================== VIDEO PLAYER ===================== //
 
 
@@ -529,9 +550,66 @@ function listenForClicks() {
         // ========== =========== ========== ========== ========== //
         // TODO: Possibly need to change querying sentence
 
+        // ====================== HOMEPAGE ======================= //
+
+        if (event.target.id === "hide-homepage-all") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_all_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAll).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAll).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-ad") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_ad_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAd).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAd).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-news") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_news_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageNews).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageNews).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-shorts") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_shorts_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageShorts).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageShorts).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-primetime") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_primetime_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepagePrimetime).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepagePrimetime).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-specialsecs") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_specialsecs_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageSpecialsecs).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageSpecialsecs).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-suggestions-rows") {
+            var m = event.target.value;
+            browser.storage.local.set({hide_homepage_suggestions_rows_state: m});
+            if (m === "inf") browser.tabs.query({active: true, currentWindow: true}).then(cancelHideHomepageSuggestionsRows).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => hideHomepageSuggestionsRows(tabs, m)).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-header") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_header_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageHeader).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageHeader).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-thumbnails") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_thumbnails_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageThumbnails).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageThumbnails).catch(reportError);
+        }
+
         // =================== NAVIGATION BAR ==================== //
 
-        if (event.target.id === "change-color-navbar-text") {
+        else if (event.target.id === "change-color-navbar-text") {
             var m = event.target.value;
             browser.storage.local.set({change_color_navbar_text_state: m});
             if (m === "default") browser.tabs.query({active: true, currentWindow: true}).then(cancelChangeColorNavbarText).catch(reportError);
@@ -607,57 +685,6 @@ function listenForClicks() {
             browser.storage.local.set({hide_navbar_footer_state: m});
             if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarFooter).catch(reportError);
             else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarFooter).catch(reportError);
-        }
-
-        // ====================== HOMEPAGE ======================= //
-
-        else if (event.target.id === "hide-homepage-all") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_all_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAll).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAll).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-ad") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_ad_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAd).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAd).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-news") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_news_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageNews).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageNews).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-shorts") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_shorts_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageShorts).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageShorts).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-primetime") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_primetime_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepagePrimetime).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepagePrimetime).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-specialsecs") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_specialsecs_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageSpecialsecs).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageSpecialsecs).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-suggestions-rows") {
-            var m = event.target.value;
-            browser.storage.local.set({hide_homepage_suggestions_rows_state: m});
-            if (m === "inf") browser.tabs.query({active: true, currentWindow: true}).then(cancelHideHomepageSuggestionsRows).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => hideHomepageSuggestionsRows(tabs, m)).catch(reportError);
-        }
-        else if (event.target.id === "hide-homepage-thumbnails") {
-            var m = event.target.checked;
-            browser.storage.local.set({hide_homepage_thumbnails_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageThumbnails).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageThumbnails).catch(reportError);
         }
 
         // ==================== VIDEO PLAYER ===================== //

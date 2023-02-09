@@ -28,6 +28,17 @@
 
     browser.runtime.onMessage.addListener((message) => {
 
+        // Set homepage titled section attributes, otherwise impossible to select
+        const homepageTitledSecs = document.querySelectorAll("ytd-rich-section-renderer");
+        homepageTitledSecs.forEach(section => {
+            const homepageTitledSecTitle = section.querySelector("#title");
+            if (!homepageTitledSecTitle?.innerText) return;
+            const homepageTitledSecTitleText = homepageTitledSecTitle.innerText.toLowerCase();
+            if (homepageTitledSecTitleText.includes("news")) section.setAttribute("ossd_homepage_news_section", "");
+            else if (homepageTitledSecTitleText.includes("shorts")) section.setAttribute("ossd_homepage_shorts_section", "");
+            else if (homepageTitledSecTitleText.includes("prime")) section.setAttribute("ossd_homepage_primetime_section", "");
+        });
+
         // Set left navigation bar section attributes, otherwise impossible to select
         const leftNavbar = document.querySelectorAll("ytd-guide-section-renderer");
         var leftNavbarCounter = 0;
@@ -42,17 +53,6 @@
             else if (leftNavbarTitleText.includes("explore")) section.setAttribute("ossd_explore_section", "");
             else if (leftNavbarTitleText.includes("more from")) section.setAttribute("ossd_more_section", "");
             leftNavbarCounter ++;
-        });
-
-        // Set homepage titled section attributes, otherwise impossible to select
-        const homepageTitledSecs = document.querySelectorAll("ytd-rich-section-renderer");
-        homepageTitledSecs.forEach(section => {
-            const homepageTitledSecTitle = section.querySelector("#title");
-            if (!homepageTitledSecTitle?.innerText) return;
-            const homepageTitledSecTitleText = homepageTitledSecTitle.innerText.toLowerCase();
-            if (homepageTitledSecTitleText.includes("news")) section.setAttribute("ossd_homepage_news_section", "");
-            else if (homepageTitledSecTitleText.includes("shorts")) section.setAttribute("ossd_homepage_shorts_section", "");
-            else if (homepageTitledSecTitleText.includes("prime")) section.setAttribute("ossd_homepage_primetime_section", "");
         });
 
         // Listen to messages from popup window
