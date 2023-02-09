@@ -28,20 +28,31 @@
 
     browser.runtime.onMessage.addListener((message) => {
 
+        // Set homepage titled section attributes, otherwise impossible to select
+        const homepageTitledSecs = document.querySelectorAll("ytd-rich-section-renderer");
+        homepageTitledSecs.forEach(section => {
+            const homepageTitledSecTitle = section.querySelector("#title");
+            if (!homepageTitledSecTitle?.innerText) return;
+            const homepageTitledSecTitleText = homepageTitledSecTitle.innerText.toLowerCase();
+            if (homepageTitledSecTitleText.includes("news")) section.setAttribute("ossd_homepage_news_section", "");
+            else if (homepageTitledSecTitleText.includes("shorts")) section.setAttribute("ossd_homepage_shorts_section", "");
+            else if (homepageTitledSecTitleText.includes("prime")) section.setAttribute("ossd_homepage_primetime_section", "");
+        });
+
         // Set left navigation bar section attributes, otherwise impossible to select
         const leftNavbar = document.querySelectorAll("ytd-guide-section-renderer");
-        var counter = 0;
+        var leftNavbarCounter = 0;
         leftNavbar.forEach(section => {
-            const title = section.querySelector("#guide-section-title");
-            if (!title?.innerText) {
-                if (counter) section.setAttribute("rys_hidden_section", "");
+            const leftNavbarTitle = section.querySelector("#guide-section-title");
+            if (!leftNavbarTitle?.innerText) {
+                if (leftNavbarCounter) section.setAttribute("ossd_hidden_section", "");
                 else return;
             }
-            const titleText = title.innerText.toLowerCase();
-            if (titleText.includes("subscriptions")) section.setAttribute("rys_sub_section", "");
-            if (titleText.includes("explore")) section.setAttribute("rys_explore_section", "");
-            if (titleText.includes("more from")) section.setAttribute("rys_more_section", "");
-            counter ++;
+            const leftNavbarTitleText = leftNavbarTitle.innerText.toLowerCase();
+            if (leftNavbarTitleText.includes("subscriptions")) section.setAttribute("ossd_sub_section", "");
+            else if (leftNavbarTitleText.includes("explore")) section.setAttribute("ossd_explore_section", "");
+            else if (leftNavbarTitleText.includes("more from")) section.setAttribute("ossd_more_section", "");
+            leftNavbarCounter ++;
         });
 
         // Listen to messages from popup window

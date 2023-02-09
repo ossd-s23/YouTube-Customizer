@@ -12,15 +12,70 @@
     <h4>
         <u>Customize YouTube Interface</u>
         <span style="float: right;">
-            <img src="../icons/icon-16.png" style="width: 20px; height: 20px;">
+            <img src="../icons/icon-32.png" style="width: 20px; height: 20px;">
             &nbsp;&nbsp;
         </span>
     </h4>
 
     <div class="tabs">
         <div class="tabs_sidebar">
+            <button class="tabs_button" data-for-tab="homepage">Homepage</button>
             <button class="tabs_button" data-for-tab="navbar">Navigation Bar</button>
             <button class="tabs_button" data-for-tab="vidplayer">Video Player</button>
+        </div>
+
+        <!-- ========== ========== ========== ========== ========== -->
+        <!--                                                        -->
+        <!--                        HOMEPAGE                        -->
+        <!--                                                        -->
+        <!-- ========== ========== ========== ========== ========== -->
+
+        <div class="tabs_content" data-tab="homepage">
+
+            <!-- ============= HIDE VIDEO SUGGESTIONS ============= -->
+            <h4>Hide Video Suggestions</h4>
+            <input type="checkbox" id="hide-homepage-all">
+            <label for="hide-homepage-all">Hide all video suggestions</label>
+            <br>
+            <input type="checkbox" id="hide-homepage-ad">
+            <label for="hide-homepage-ad">Hide advertisement</label>
+            <br>
+            <input type="checkbox" id="hide-homepage-news">
+            <label for="hide-homepage-news">Hide news suggestions</label>
+            <br>
+            <input type="checkbox" id="hide-homepage-shorts">
+            <label for="hide-homepage-shorts">Hide shorts suggestions</label>
+            <br>
+            <input type="checkbox" id="hide-homepage-primetime">
+            <label for="hide-homepage-primetime">Hide Primetime suggestions</label>
+            <br>
+            <input type="checkbox" id="hide-homepage-specialsecs">
+            <label for="hide-homepage-specialsecs">Hide <u title="This include news, shorts, Primetime, etc.">special sections</u></label>
+            <br>
+            <br>
+            <label for="hide-homepage-suggestions-rows">Show</label>&nbsp;
+            <select id="hide-homepage-suggestions-rows">
+                <option value="inf">&#8734;</option>
+                <option value="2">1</option>
+                <option value="3">2</option>
+                <option value="4">3</option>
+                <option value="5">4</option>
+                <option value="6">5</option>
+            </select>
+            &nbsp;row(s) of suggestions
+            <br>
+            <span style="font-size: 0.75rem; color: #888888;">
+                Note: this does not count <u title="This include news, shorts, Primetime, etc.">special sections</u>
+            </span>
+
+            <!-- =========== CUSTOMIZE HOMEPAGE LAYOUT ============ -->
+            <h4>Customize Homepage Layout</h4>
+            <input type="checkbox" id="hide-homepage-header">
+            <label for="hide-homepage-header">Hide the header</label>
+            <br>
+            <input type="checkbox" id="hide-homepage-thumbnails">
+            <label for="hide-homepage-thumbnails">Hide video thumbnails</label>
+
         </div>
 
         <!-- ========== ========== ========== ========== ========== -->
@@ -97,6 +152,9 @@
         <!-- ========== ========== ========== ========== ========== -->
 
         <div class="tabs_content" data-tab="vidplayer">
+
+            <!-- ====== CUSTOMIZE THE SCRUBBER AND PROGRESS BAR ======= -->
+            <h4>Customize the Scrubber and Progress Bar</h4>
             <code>To be done...</code>
             <h4>Color Customization</h4>
             <label for="change-color-progbar-text">Progress Bar Color</label>&nbsp;
@@ -113,7 +171,7 @@
     </div>
 
     <div class="box">
-        <div><a href=""><i class="fa fa-info"></i>&nbsp;Information</a></div>
+        <div><a href="https://charlie-xiao.github.io/education/YouTube-Interface-Customizer.html"><i class="fa fa-info"></i>&nbsp;Information</a></div>
         <div><a href="https://github.com/ossd-s23/YouTube-Customizer"><i class="fa fa-github"></i>&nbsp;Repository</a></div>
         <div><a href="https://forms.gle/gPhK9o5SXBqGF5qB9"><i class="fa fa-file"></i>&nbsp;Feedback</a></div>
     </div>
