@@ -39,7 +39,7 @@ function CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color) { return `
     html ytd-guide-section-renderer[ossd_more_section] span.title,
     html ytd-guide-section-renderer[ossd_hidden_section] yt-formatted-string,
     html ytd-guide-section-renderer[ossd_hidden_section] yt-icon.guide-icon,
-    html ytd-guide-section-renderer[ossd_hidden_section] span.title 
+    html ytd-guide-section-renderer[ossd_hidden_section] span.title
     { color: ${color} !important; }
 `; }
 const CSS_SCRIPT_HIDE_NAVBAR_ALL = `
@@ -109,10 +109,22 @@ const CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS = `
     html ytd-rich-section-renderer[ossd_homepage_shorts_section]
     { display: none !important; }
 `;
+const CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME = `
+    html ytd-rich-section-renderer[ossd_homepage_primetime_section]
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS = `
+    html ytd-rich-section-renderer
+    { display: none !important; }
+`;
+function CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num) { return `
+    html ytd-browse[page-subtype="home"] ytd-rich-grid-renderer > #contents > ytd-rich-grid-row:nth-of-type(n+${num})
+    { display: none !important; }
+`; }
 const CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS = `
     html ytd-thumbnail,
     html #media-container.ytd-display-ad-renderer
-    { display: none !important; }   
+    { display: none !important; }
 `;
 
 // ==================== VIDEO PLAYER ===================== //
@@ -166,6 +178,12 @@ function memorizeStates() {
         .then(result => document.getElementById("hide-homepage-news").checked = !!result.hide_homepage_news_state);
     browser.storage.local.get({hide_homepage_shorts_state: ""})
         .then(result => document.getElementById("hide-homepage-shorts").checked = !!result.hide_homepage_shorts_state);
+    browser.storage.local.get({hide_homepage_primetime_state: ""})
+        .then(result => document.getElementById("hide-homepage-primetime").checked = !!result.hide_homepage_primetime_state);
+    browser.storage.local.get({hide_homepage_specialsecs_state: ""})
+        .then(result => document.getElementById("hide-homepage-specialsecs").checked = !!result.hide_homepage_specialsecs_state);
+    browser.storage.local.get({hide_homepage_suggestions_rows_state: ""})
+        .then(result => document.getElementById("hide-homepage-suggestions-rows").value = result.hide_homepage_suggestions_rows_state);
     browser.storage.local.get({hide_homepage_thumbnails_state: ""})
         .then(result => document.getElementById("hide-homepage-thumbnails").checked = !!result.hide_homepage_thumbnails_state);
 
@@ -439,6 +457,51 @@ function listenForClicks() {
             });
         }
 
+        function hideHomepagePrimetime(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-primetime",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
+            });
+        }
+        function unhideHomepagePrimetime(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-primetime",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
+            });
+        }
+
+        function hideHomepageSpecialsecs(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-specialsecs",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
+            });
+        }
+        function unhideHomepageSpecialsecs(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-specialsecs",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
+            });
+        }
+
+        function hideHomepageSuggestionsRows(tabs, num) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-hide-homepage-suggestions-rows",
+                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num),
+            });
+        }
+        function cancelHideHomepageSuggestionsRows(tabs) {
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-hide-homepage-suggestions-rows",
+                css_script: "",
+            });
+        }
+
         function hideHomepageThumbnails(tabs) {
             browser.tabs.sendMessage(tabs[0].id, {
                 command: "insert_css",
@@ -571,6 +634,24 @@ function listenForClicks() {
             browser.storage.local.set({hide_homepage_shorts_state: m});
             if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageShorts).catch(reportError);
             else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageShorts).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-primetime") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_primetime_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepagePrimetime).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepagePrimetime).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-specialsecs") {
+            var m = event.target.checked;
+            browser.storage.local.set({hide_homepage_specialsecs_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageSpecialsecs).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageSpecialsecs).catch(reportError);
+        }
+        else if (event.target.id === "hide-homepage-suggestions-rows") {
+            var m = event.target.value;
+            browser.storage.local.set({hide_homepage_suggestions_rows_state: m});
+            if (m === "inf") browser.tabs.query({active: true, currentWindow: true}).then(cancelHideHomepageSuggestionsRows).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => hideHomepageSuggestionsRows(tabs, m)).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-thumbnails") {
             var m = event.target.checked;

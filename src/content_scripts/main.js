@@ -52,6 +52,7 @@
             const homepageTitledSecTitleText = homepageTitledSecTitle.innerText.toLowerCase();
             if (homepageTitledSecTitleText.includes("news")) section.setAttribute("ossd_homepage_news_section", "");
             else if (homepageTitledSecTitleText.includes("shorts")) section.setAttribute("ossd_homepage_shorts_section", "");
+            else if (homepageTitledSecTitleText.includes("prime")) section.setAttribute("ossd_homepage_primetime_section", "");
         });
 
         // Listen to messages from popup window
