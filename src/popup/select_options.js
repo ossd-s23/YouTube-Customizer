@@ -4,6 +4,36 @@
 //                                                         //
 // ========== =========== ========== ========== ========== //
 
+// ======================= GENERAL ======================= //
+
+const CSS_SCRIPT_TURN_SKYMODE_ON = `
+    html #container.ytd-masthead
+    { background-color: #a8dadc; }
+    html ytd-app,
+    html ytd-app[darker-dark-theme],
+    html #channel-header.ytd-c4-tabbed-header-renderer,
+    html #contents.ytd-rich-grid-renderer,
+    html ytd-shorts,
+    html #shorts-container.ytd-shorts,
+    html ytd-browse,
+    html #tabs-inner-container.ytd-c4-tabbed-header-renderer,
+    html ytd-app[darker-dark-theme] #guide-content.ytd-app,
+    html ytd-app[guide-refresh] ytd-mini-guide-renderer.ytd-app,
+    html ytd-watch-flexy[flexy][is-two-columns_] #columns.ytd-watch-flexy,
+    html ytd-feed-filter-chip-bar-renderer[darker-dark-theme] #chips-wrapper.ytd-feed-filter-chip-bar-renderer
+    { background-color: #f1faee; }
+    html .guide-icon.ytd-mini-guide-entry-renderer,
+    html ytd-mini-guide-entry-renderer[system-icons][is-active] .title.ytd-mini-guide-entry-renderer,
+    html ytd-mini-guide-entry-renderer[system-icons] .title.ytd-mini-guide-entry-renderer,
+    html tp-yt-paper-tab:not(.iron-selected) .tp-yt-paper-tab[style-target="tab-content"]
+    { color: #212121; }
+    html yt-chip-cloud-chip-renderer[modern-chips][chip-style],
+    html .header.ytd-playlist-panel-renderer
+    { background-color: #a8dadc; border: 1px solid #ffffff; }
+    html yt-chip-cloud-chip-renderer[modern-chips][chip-style]
+    { background-color: #457b9d; color: #f1faee; }
+`;
+
 // ====================== HOMEPAGE ======================= //
 
 const CSS_SCRIPT_HIDE_HOMEPAGE_ALL = `
@@ -137,33 +167,6 @@ function CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(color) { return `
     html .ytp-scrubber-button
     { background-color: ${color} !important; }
 `; }
-const CSS_SCRIPT_TURN_SKYMODE_ON = `
-    html #container.ytd-masthead
-    { background-color: #a8dadc; }
-    html ytd-app,
-    html ytd-app[darker-dark-theme],
-    html #channel-header.ytd-c4-tabbed-header-renderer,
-    html #contents.ytd-rich-grid-renderer,
-    html ytd-shorts,
-    html #shorts-container.ytd-shorts,
-    html ytd-browse,
-    html #tabs-inner-container.ytd-c4-tabbed-header-renderer,
-    html ytd-app[darker-dark-theme] #guide-content.ytd-app,
-    html ytd-app[guide-refresh] ytd-mini-guide-renderer.ytd-app,
-    html ytd-watch-flexy[flexy][is-two-columns_] #columns.ytd-watch-flexy,
-    html ytd-feed-filter-chip-bar-renderer[darker-dark-theme] #chips-wrapper.ytd-feed-filter-chip-bar-renderer
-    { background-color: #f1faee; }
-    html .guide-icon.ytd-mini-guide-entry-renderer,
-    html ytd-mini-guide-entry-renderer[system-icons][is-active] .title.ytd-mini-guide-entry-renderer,
-    html ytd-mini-guide-entry-renderer[system-icons] .title.ytd-mini-guide-entry-renderer,
-    html tp-yt-paper-tab:not(.iron-selected) .tp-yt-paper-tab[style-target="tab-content"]
-    { color: #212121; }
-    html yt-chip-cloud-chip-renderer[modern-chips][chip-style],
-    html .header.ytd-playlist-panel-renderer
-    { background-color: #a8dadc; border: 1px solid #ffffff; }
-    html yt-chip-cloud-chip-renderer[modern-chips][chip-style]
-    { background-color: #457b9d; color: #f1faee; }
-`;
 
 // ========== =========== ========== ========== ========== //
 //                                                         //
@@ -172,6 +175,11 @@ const CSS_SCRIPT_TURN_SKYMODE_ON = `
 // ========== =========== ========== ========== ========== //
 
 function memorizeStates() {
+    
+    // ======================= GENERAL ======================= //
+
+    browser.storage.local.get({sky_mode_on_state: ""})
+        .then(result => document.getElementById("sky-mode-on").checked = !!result.sky_mode_on_state);
 
     // ====================== HOMEPAGE ======================= //
 
@@ -227,8 +235,6 @@ function memorizeStates() {
 
     browser.storage.local.get({change_color_progbar_text_state: ""})
         .then(result => document.getElementById("change-color-progbar-text").value = result.change_color_progbar_text_state);
-    browser.storage.local.get({sky_mode_on_state: ""})
-        .then(result => document.getElementById("sky-mode-on").checked = !!result.sky_mode_on_state);
 
 }
 
@@ -244,6 +250,23 @@ function listenForClicks() {
         //                                                         //
         // ========== =========== ========== ========== ========== //
         // TODO: Possibly need to change usage of tabs API
+
+        // ======================= GENERAL ======================= //
+
+        function skyModeOn(tabs){
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "insert_css",
+                description: "css-script-turn-skymode-on",
+                css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
+            });
+        }
+        function skyModeOff(tabs){
+            browser.tabs.sendMessage(tabs[0].id, {
+                command: "remove_css",
+                description: "css-script-turn-skymode-on",
+                css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
+            });
+        }
     
         // ====================== HOMEPAGE ======================= //
 
@@ -588,21 +611,6 @@ function listenForClicks() {
             });
         }
 
-        function skyModeOn(tabs){
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-turn-skymode-on",
-                css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
-            });
-        }
-        function skyModeOff(tabs){
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-turn-skymode-on",
-                css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
-            });
-        }
-
         // ========== =========== ========== ========== ========== //
         //                                                         //
         //            DECLARING CUSTOMIZATION TRIGGERS             //
@@ -610,9 +618,18 @@ function listenForClicks() {
         // ========== =========== ========== ========== ========== //
         // TODO: Possibly need to change querying sentence
 
+        // ====================== GENERAL ======================= //
+
+        if(event.target.id === "sky-mode-on"){
+            var m = event.target.checked;
+            browser.storage.local.set({sky_mode_on_state: m});
+            if (m) browser.tabs.query({active: true, currentWindow: true}).then(skyModeOn).catch(reportError);
+            else browser.tabs.query({active: true, currentWindow: true}).then(skyModeOff).catch(reportError);
+        }
+
         // ====================== HOMEPAGE ======================= //
 
-        if (event.target.id === "hide-homepage-all") {
+        else if (event.target.id === "hide-homepage-all") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_all_state: m});
             if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAll).catch(reportError);
@@ -755,12 +772,7 @@ function listenForClicks() {
             if (m === "default") browser.tabs.query({active: true, currentWindow: true}).then(cancelChangeColorProgbarText).catch(reportError);
             else browser.tabs.query({active: true, currentWindow: true}).then(tabs => changeColorProgbarText(tabs, m)).catch(reportError);
         }
-        else if(event.target.id === "sky-mode-on"){
-            var m = event.target.checked;
-            browser.storage.local.set({sky_mode_on_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(skyModeOn).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(skyModeOff).catch(reportError);
-        }
+
     });
 }
 

@@ -19,9 +19,25 @@
 
     <div class="tabs">
         <div class="tabs_sidebar">
+            <button class="tabs_button" data-for-tab="general">General</button>
             <button class="tabs_button" data-for-tab="homepage">Homepage</button>
             <button class="tabs_button" data-for-tab="navbar">Navigation Bar</button>
             <button class="tabs_button" data-for-tab="vidplayer">Video Player</button>
+        </div>
+
+        <!-- ========== ========== ========== ========== ========== -->
+        <!--                                                        -->
+        <!--                        GENERAL                         -->
+        <!--                                                        -->
+        <!-- ========== ========== ========== ========== ========== -->
+
+        <div class="tabs_content" data-tab="general">
+
+            <!-- ============ CUSTOMIZE COLOR SCHEMES ============= -->
+            <h4>Customize Color Scheme</h4>
+            <input type="checkbox" id="sky-mode-on">
+            <label for="sky-mode-on">Turn on Sky Mode</label>
+
         </div>
 
         <!-- ========== ========== ========== ========== ========== -->
@@ -87,7 +103,7 @@
         <div class="tabs_content" data-tab="navbar">
 
             <!-- =================== CHANGE COLORS ==================== -->
-            <h4>Color Customization</h4>
+            <h4>Customize Color</h4>
             <label for="change-color-navbar-text">Text and icons</label>&nbsp;
             <select id="change-color-navbar-text">
                 <option value="default">Default</option>
@@ -97,7 +113,7 @@
             </select>
 
             <!-- ============== YOUTUBE ICON REDIRECTION ============== -->
-            <h4>YouTube Logo Redirection</h4>
+            <h4>Redirect YouTube Logo</h4>
             <label for="icon-redirect-navbar">Redirect to</label>&nbsp;
             <select id="icon-redirect-navbar">
                 <option value="https://www.youtube.com/">Home</option>
@@ -154,18 +170,14 @@
         <div class="tabs_content" data-tab="vidplayer">
 
             <!-- ====== CUSTOMIZE THE SCRUBBER AND PROGRESS BAR ======= -->
-            <!-- ====== CUSTOMIZE THE SCRUBBER AND PROGRESS BAR ======= -->
-            <h4>Color Customization</h4>
-            <label for="change-color-progbar-text">Progress Bar Color</label>&nbsp;
+            <h4>Customize Color</h4>
+            <label for="change-color-progbar-text">Progress bar</label>&nbsp;
             <select id="change-color-progbar-text">
                 <option value="default">Default</option>
                 <option value="#880000">Dark Red</option>
                 <option value="#0000ff">Blue</option>
                 <option value="#800080">Purple</option>
             </select>
-            <br>
-            <input type="checkbox" id="sky-mode-on">
-            <label for="sky-mode-on">Turn on the sky mode</label>
         </div>
     </div>
 
