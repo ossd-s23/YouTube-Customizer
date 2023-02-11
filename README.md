@@ -42,6 +42,10 @@ Customize the features as per your preference.
 
 If you encounter any issues while using the extension, please feel free to reach out to us. We will do our best to resolve your issues as soon as possible.
 
+## License
+
+See the [License Page](https://github.com/ossd-s23/YouTube-Customizer/blob/main/LICENSE).
+
 ## Conclusion
 
 We hope that this extension will help you customize your Youtube experience to your liking. If you have any suggestions for improvements, please let us know. Happy browsing!
