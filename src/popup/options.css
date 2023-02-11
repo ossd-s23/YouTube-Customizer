@@ -1,6 +1,38 @@
+@font-face {
+    font-family: "EBGaramond-Regular";
+    src: local("EBGaramond"),
+    url("../css/fonts/EBGaramond-Regular.ttf") format("truetype");
+}
+  
 html, body {
     width: 500px;
-    font-family: Roboto, sans-serif;
+    font-family: 'EBGaramond', sans-serif;
+}
+
+.Heading{
+    font-family: 'EBGaramond';
+    font-size: 25px;
+    color: #db4c54;
+}
+
+.header-content{
+    display: flex;
+    align-items: center; 
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5px;
+    justify-content: center;
+    text-align: center;
+}
+
+.tiny-icon {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 0;
+    height: 32px;
+    width: 32px;
 }
 
 .tabs {
