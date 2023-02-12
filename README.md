@@ -1,11 +1,16 @@
-<img src="src/icons/icon-128.png" style="display: block; margin-left: auto; margin-right: auto;">
-
-<p style="text-align: center; font-weight: bold; font-size: 2rem;">YouTube Interface Customizer</p>
-<p style="text-align: center; font-weight: normal; font-size: 1.2rem; margin-top: -15px;">Team 4 Add-on Project</p>
-
-## Introduction
+<div align="center">
+    <img src="src/icons/icon-128.png" width="150">
+    <h2>YouTube Interface Customizer</h2>
+    <p style="text-align: center; font-weight: normal; font-size: 1.2rem; margin-top: -15px;">
+        Team 4 Add-on Project <br>
+        <a rel="noreferrer noopener" href="#">
+            <img src="https://img.shields.io/badge/Firefox-141e24.svg?&style=for-the-badge&logo=firefox-browser&logoColor=white" />
+        </a>
+    </p>
+</div>
 
 This extension allows you to enhance your Youtube experience by customizing various features of the site. You can easily hide the navigation bar, remove ads, choose from a range of color templates, and so on.
+
 
 ## Features
 
