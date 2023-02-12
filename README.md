@@ -1,50 +1,36 @@
-# YouTube-Customizer
+<img src="src/icons/icon-128.png" style="display: block; margin-left: auto; margin-right: auto;">
 
-Team 4 Add-on Activity Project
+<p style="text-align: center; font-weight: bold; font-size: 2rem;">YouTube Interface Customizer</p>
+<p style="text-align: center; font-weight: normal; font-size: 1.2rem; margin-top: -15px;">Team 4 Add-on Project</p>
 
 ## Introduction
 
-This extension allows you to enhance your Youtube experience by customizing various features of the site. You can easily hide the navigation bar, remove ads, and choose from a range of color templates.
+This extension allows you to enhance your Youtube experience by customizing various features of the site. You can easily hide the navigation bar, remove ads, choose from a range of color templates, and so on.
 
 ## Features
 
-Customize the navigation bar
+Detailed descriptions of the features can be found [here](https://charlie-xiao.github.io/education/YouTube-Interface-Customizer.html). Below is an outline of the features:
 
-Customize the homepage
-
-Customized color
+- **General**: Customize color scheme.
+- **Homepage**: Hide video suggestions; Customize homepage layout.
+- **Navigation bar**: Customize color; Redirect YouTube logo; Hide buttons and sections.
+- **Video player**: Customize color.
 
 ## Installation
 
-Open Firefox browser and go to the Add-ons section.
-
-Click on the "Extensions" button.
-
-Click on the "Get Add-ons" button.
-
-Search for "YouTube Customizer" in the search bar.
-
-Click on the "Add to Firefox" button.
-
-Wait for the extension to install and then click on "Add."
-
-The extension icon will appear on the top right corner of your browser.
-
-## Usage
-
-Go to the Youtube website.
-
-Click on the extension icon.
-
-Customize the features as per your preference.
+To get a development environment, clone this repository to your local device and visit the [Mozilla Firefox debugging page](about:debugging#/runtime/this-firefox). Click the `Load Temporary Add-on...` button and select `src/manifest.json`. Then you will be able to simulate an environment with this extension until you exit the browser.
 
 ## Support
 
-If you encounter any issues while using the extension, please feel free to reach out to us. We will do our best to resolve your issues as soon as possible.
+If you encounter any issues while using the extension, feel free to reach out to us. If you want to provide any suggestion or feedback, or report any bug, you can also fill out [this form](https://forms.gle/gPhK9o5SXBqGF5qB9). We will read your feedback and do our best to resolve your issues as soon as possible.
+
+## Contribution
+
+See the [Contribution page](CONTRIBUTING.md). Also see the [Code of Conduct document](CODE_OF_CONDUCT.md).
 
 ## License
 
-See the [License Page](https://github.com/ossd-s23/YouTube-Customizer/blob/main/LICENSE).
+See the [License Page](LICENSE).
 
 ## Conclusion
 
