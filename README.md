@@ -3,7 +3,7 @@
     <h2>YouTube Interface Customizer</h2>
     <p style="text-align: center; font-weight: normal; font-size: 1.2rem; margin-top: -15px;">
         Team 4 Add-on Project <br>
-        <a rel="noreferrer noopener" href="https://addons.mozilla.org/en-US/firefox/addon/minimal-youtube-extension/">
+        <a rel="noreferrer noopener" href="#">
             <img src="https://img.shields.io/badge/Firefox-141e24.svg?&style=for-the-badge&logo=firefox-browser&logoColor=white" />
         </a>
     </p>
