@@ -3,7 +3,7 @@
     // Check and set a global guard variable
     if (window.hasRun) return;
     window.hasRun = true;
-
+    
     var iconRedirectNavbarURL = "https://www.youtube.com/";
 
     // Insert CSS script into the page with id as the specified description
