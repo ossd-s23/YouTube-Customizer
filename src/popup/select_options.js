@@ -254,361 +254,455 @@ function listenForClicks() {
         // ======================= GENERAL ======================= //
 
         function skyModeOn(tabs){
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-turn-skymode-on",
-                css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-turn-skymode-on",
+                    css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
+                });
+            }
         }
         function skyModeOff(tabs){
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-turn-skymode-on",
-                css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-turn-skymode-on",
+                    css_script: CSS_SCRIPT_TURN_SKYMODE_ON,
+                });
+            }
         }
     
         // ====================== HOMEPAGE ======================= //
 
         function hideHomepageAll(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-all",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tabs[0].id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-all",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
+                });
+            }
         }
         function unhideHomepageAll(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-all",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-all",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_ALL,
+                });
+            }
         }
 
         function hideHomepageAd(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-ad",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-ad",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
+                });
+            }
         }
         function unhideHomepageAd(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-ad",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-ad",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_AD,
+                });
+            }
         }
 
         function hideHomepageNews(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-news",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-news",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
+                });
+            }
         }
         function unhideHomepageNews(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-news",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-news",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_NEWS,
+                });
+            }
         }
 
         function hideHomepageShorts(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-shorts",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-shorts",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
+                });
+            }
         }
         function unhideHomepageShorts(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-shorts",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-shorts",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SHORTS,
+                });
+            }
         }
 
         function hideHomepagePrimetime(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-primetime",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-primetime",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
+                });
+            }
         }
         function unhideHomepagePrimetime(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-primetime",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-primetime",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_PRIMETIME,
+                });
+            }
         }
 
         function hideHomepageSpecialsecs(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-specialsecs",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-specialsecs",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
+                });
+            }
         }
         function unhideHomepageSpecialsecs(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-specialsecs",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-specialsecs",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SPECIALSECS,
+                });
+            }
         }
 
         function hideHomepageSuggestionsRows(tabs, num) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-suggestions-rows",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num),
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-suggestions-rows",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_SUGGESTIONS_ROWS(num),
+                });
+            }
         }
         function cancelHideHomepageSuggestionsRows(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-suggestions-rows",
-                css_script: "",
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-suggestions-rows",
+                    css_script: "",
+                });
+            }
         }
 
         function hideHomepageHeader(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-header",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_HEADER,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-header",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_HEADER,
+                });
+            }
         }
         function unhideHomepageHeader(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-header",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_HEADER,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-header",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_HEADER,
+                });
+            }
         }
 
         function hideHomepageThumbnails(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-homepage-thumbnails",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-homepage-thumbnails",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
+                });
+            }
         }
         function unhideHomepageThumbnails(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-homepage-thumbnails",
-                css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-homepage-thumbnails",
+                    css_script: CSS_SCRIPT_HIDE_HOMEPAGE_THUMBNAILS,
+                });
+            }
         }
 
         // =================== NAVIGATION BAR ==================== //
 
         function changeColorNavbarText(tabs, color) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-change-color-navbar-text",
-                css_script: CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color),
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-change-color-navbar-text",
+                    css_script: CSS_SCRIPT_CHANGE_COLOR_NAVBAR_TEXT(color),
+                });
+            }
         }
         function cancelChangeColorNavbarText(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-change-color-navbar-text",
-                css_script: "",
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-change-color-navbar-text",
+                    css_script: "",
+                });
+            }
         }
 
         function iconRedirectNavbar(tabs, url) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "i_icon_redirect_navbar",
-                url: url,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "i_icon_redirect_navbar",
+                    url: url,
+                });
+            }
         }
 
         function hideNavbarAll(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-all",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_ALL,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-all",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_ALL,
+                });
+            }
         }
         function unhideNavbarAll(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-all",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_ALL,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-all",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_ALL,
+                });
+            }
         }
 
         function hideNavbarHome(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-home",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_HOME,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-home",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_HOME,
+                });
+            }
         }
         function unhideNavbarHome(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-home",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_HOME,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-home",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_HOME,
+                });
+            }
         }
 
         function hideNavbarExplore(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-explore",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORE,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-explore",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORE,
+                });
+            }
         }
         function unhideNavbarExplore(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-explore",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORE,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-explore",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORE,
+                });
+            }
         }
 
         function hideNavbarShorts(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-shorts",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SHORTS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-shorts",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SHORTS,
+                });
+            }
         }
         function unhideNavbarShorts(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-shorts",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SHORTS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-shorts",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SHORTS,
+                });
+            }
         }
 
         function hideNavbarSub(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-sub",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SUB,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-sub",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SUB,
+                });
+            }
         }
         function unhideNavbarSub(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-sub",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SUB,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-sub",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SUB,
+                });
+            }
         }
 
         function hideNavbarQuicklinks(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-quicklinks",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_QUICKLINKS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-quicklinks",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_QUICKLINKS,
+                });
+            }
         }
         function unhideNavbarQuicklinks(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-quicklinks",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_QUICKLINKS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-quicklinks",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_QUICKLINKS,
+                });
+            }
         }
 
         function hideNavbarSubsec(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-subsec",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SUBSEC,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-subsec",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SUBSEC,
+                });
+            }
         }
         function unhideNavbarSubsec(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-subsec",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SUBSEC,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-subsec",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SUBSEC,
+                });
+            }
         }
 
         function hideNavbarExploresec(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-exploresec",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORESEC,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-exploresec",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORESEC,
+                });
+            }
         }
         function unhideNavbarExploresec(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-exploresec",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORESEC,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-exploresec",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_EXPLORESEC,
+                });
+            }
         }
 
         function hideNavbarMore(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-more",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_MORE,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-more",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_MORE,
+                });
+            }
         }
         function unhideNavbarMore(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-more",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_MORE,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-more",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_MORE,
+                });
+            }
         }
 
         function hideNavbarSettings(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-settings",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SETTINGS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-settings",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SETTINGS,
+                });
+            }
         }
         function unhideNavbarSettings(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-settings",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_SETTINGS,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-settings",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_SETTINGS,
+                });
+            }
         }
 
         function hideNavbarFooter(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-hide-navbar-footer",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_FOOTER,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-hide-navbar-footer",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_FOOTER,
+                });
+            }
         }
         function unhideNavbarFooter(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-hide-navbar-footer",
-                css_script: CSS_SCRIPT_HIDE_NAVBAR_FOOTER,
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-hide-navbar-footer",
+                    css_script: CSS_SCRIPT_HIDE_NAVBAR_FOOTER,
+                });
+            }
         }
 
         // ==================== VIDEO PLAYER ===================== //
 
         function changeColorProgbarText(tabs, color) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "insert_css",
-                description: "css-script-change-color-progbar-text",
-                css_script: CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(color),
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-change-color-progbar-text",
+                    css_script: CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(color),
+                });
+            }
         }
         function cancelChangeColorProgbarText(tabs) {
-            browser.tabs.sendMessage(tabs[0].id, {
-                command: "remove_css",
-                description: "css-script-change-color-progbar-text",
-                css_script: "",
-            });
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "remove_css",
+                    description: "css-script-change-color-progbar-text",
+                    css_script: "",
+                });
+            }
         }
 
         // ========== =========== ========== ========== ========== //
@@ -623,8 +717,8 @@ function listenForClicks() {
         if(event.target.id === "sky-mode-on"){
             var m = event.target.checked;
             browser.storage.local.set({sky_mode_on_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(skyModeOn).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(skyModeOff).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(skyModeOn).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(skyModeOff).catch(reportError);
         }
 
         // ====================== HOMEPAGE ======================= //
@@ -632,56 +726,56 @@ function listenForClicks() {
         else if (event.target.id === "hide-homepage-all") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_all_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAll).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAll).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageAll).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageAll).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-ad") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_ad_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageAd).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageAd).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageAd).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageAd).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-news") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_news_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageNews).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageNews).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageNews).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageNews).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-shorts") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_shorts_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageShorts).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageShorts).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageShorts).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageShorts).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-primetime") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_primetime_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepagePrimetime).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepagePrimetime).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepagePrimetime).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepagePrimetime).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-specialsecs") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_specialsecs_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageSpecialsecs).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageSpecialsecs).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageSpecialsecs).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageSpecialsecs).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-suggestions-rows") {
             var m = event.target.value;
             browser.storage.local.set({hide_homepage_suggestions_rows_state: m});
-            if (m === "inf") browser.tabs.query({active: true, currentWindow: true}).then(cancelHideHomepageSuggestionsRows).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => hideHomepageSuggestionsRows(tabs, m)).catch(reportError);
+            if (m === "inf") browser.tabs.query({currentWindow: true}).then(cancelHideHomepageSuggestionsRows).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(tabs => hideHomepageSuggestionsRows(tabs, m)).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-header") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_header_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageHeader).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageHeader).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageHeader).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageHeader).catch(reportError);
         }
         else if (event.target.id === "hide-homepage-thumbnails") {
             var m = event.target.checked;
             browser.storage.local.set({hide_homepage_thumbnails_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideHomepageThumbnails).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideHomepageThumbnails).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideHomepageThumbnails).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideHomepageThumbnails).catch(reportError);
         }
 
         // =================== NAVIGATION BAR ==================== //
@@ -689,79 +783,79 @@ function listenForClicks() {
         else if (event.target.id === "change-color-navbar-text") {
             var m = event.target.value;
             browser.storage.local.set({change_color_navbar_text_state: m});
-            if (m === "default") browser.tabs.query({active: true, currentWindow: true}).then(cancelChangeColorNavbarText).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => changeColorNavbarText(tabs, m)).catch(reportError);
+            if (m === "default") browser.tabs.query({currentWindow: true}).then(cancelChangeColorNavbarText).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(tabs => changeColorNavbarText(tabs, m)).catch(reportError);
         }
         else if (event.target.id === "icon-redirect-navbar") {
             var m = event.target.value;
             browser.storage.local.set({icon_redirect_navbar_state: m});
-            browser.tabs.query({active: true, currentWindow: true}).then(tabs => iconRedirectNavbar(tabs, m)).catch(reportError);
+            browser.tabs.query({currentWindow: true}).then(tabs => iconRedirectNavbar(tabs, m)).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-all") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_all_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarAll).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarAll).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarAll).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarAll).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-home") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_home_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarHome).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarHome).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarHome).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarHome).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-explore") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_explore_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarExplore).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarExplore).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarExplore).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarExplore).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-shorts") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_shorts_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarShorts).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarShorts).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarShorts).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarShorts).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-sub") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_sub_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarSub).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarSub).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarSub).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarSub).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-quicklinks") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_quicklinks_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarQuicklinks).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarQuicklinks).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarQuicklinks).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarQuicklinks).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-subsec") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_subsec_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarSubsec).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarSubsec).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarSubsec).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarSubsec).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-exploresec") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_exploresec_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarExploresec).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarExploresec).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarExploresec).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarExploresec).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-more") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_more_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarMore).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarMore).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarMore).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarMore).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-settings") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_settings_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarSettings).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarSettings).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarSettings).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarSettings).catch(reportError);
         }
         else if (event.target.id === "hide-navbar-footer") {
             var m = event.target.checked;
             browser.storage.local.set({hide_navbar_footer_state: m});
-            if (m) browser.tabs.query({active: true, currentWindow: true}).then(hideNavbarFooter).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(unhideNavbarFooter).catch(reportError);
+            if (m) browser.tabs.query({currentWindow: true}).then(hideNavbarFooter).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(unhideNavbarFooter).catch(reportError);
         }
 
         // ==================== VIDEO PLAYER ===================== //
@@ -769,8 +863,8 @@ function listenForClicks() {
         else if (event.target.id === "change-color-progbar-text") {
             var m = event.target.value;
             browser.storage.local.set({change_color_progbar_text_state: m});
-            if (m === "default") browser.tabs.query({active: true, currentWindow: true}).then(cancelChangeColorProgbarText).catch(reportError);
-            else browser.tabs.query({active: true, currentWindow: true}).then(tabs => changeColorProgbarText(tabs, m)).catch(reportError);
+            if (m === "default") browser.tabs.query({currentWindow: true}).then(cancelChangeColorProgbarText).catch(reportError);
+            else browser.tabs.query({currentWindow: true}).then(tabs => changeColorProgbarText(tabs, m)).catch(reportError);
         }
 
     });
