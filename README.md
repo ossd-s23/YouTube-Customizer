@@ -3,7 +3,7 @@
     <h2>YouTube Interface Customizer</h2>
     <p style="text-align: center; font-weight: normal; font-size: 1.2rem; margin-top: -15px;">
         Team 4 Add-on Project <br>
-        <a rel="noreferrer noopener" href="#">
+        <a rel="noreferrer noopener" href="https://addons.mozilla.org/firefox/downloads/file/4069744/438bf7e9f2714ba58ac1-1.0.xpi">
             <img src="https://img.shields.io/badge/Firefox-141e24.svg?&style=for-the-badge&logo=firefox-browser&logoColor=white" />
         </a>
     </p>
@@ -24,6 +24,8 @@ Detailed descriptions of the features can be found [here](https://charlie-xiao.g
 ## Installation
 
 To get a development environment, clone this repository to your local device and visit the [Mozilla Firefox debugging page](about:debugging#/runtime/this-firefox). Click the `Load Temporary Add-on...` button and select `src/manifest.json`. Then you will be able to simulate an environment with this extension until you exit the browser.
+
+There is also a self-distributed version [here](https://addons.mozilla.org/firefox/downloads/file/4069744/438bf7e9f2714ba58ac1-1.0.xpi). Make sure you have a Mozilla developer account (you can sign up one [here](https://addons.mozilla.org/en-US/firefox/)), and you are using the Firefox browser so as to use this link.
 
 ## Support
 
