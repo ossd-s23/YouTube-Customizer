@@ -16,10 +16,10 @@ This extension allows you to customize a wide variety elements of the YouTube in
 
 Detailed descriptions of the features can be found [here](https://charlie-xiao.github.io/education/YouTube-Interface-Customizer.html). Below is an outline of the features:
 
-- **General**: Customize color scheme.
+- **General**: Customize color theme.
 - **Homepage**: Hide video suggestions; Customize homepage layout.
 - **Navigation bar**: Customize color; Redirect YouTube logo; Hide buttons and sections.
-- **Video player**: Customize the scrubber and progress bar.
+- **Video player**: Customize the scrubber and progress bar; Customize video player layout.
 
 ## Installation
 

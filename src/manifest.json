@@ -39,6 +39,12 @@
         "images/pusheen.gif",
         "images/pikachu.gif",
         "images/capoo.gif"
-    ]
+    ],
+
+    "browser_specific_settings": {
+        "gecko": {
+            "update_url": "https://example.com/updates.json"
+        }
+    }
 
 }
