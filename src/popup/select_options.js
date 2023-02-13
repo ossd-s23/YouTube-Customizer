@@ -4,12 +4,24 @@
 //                                                         //
 // ========== =========== ========== ========== ========== //
 
-const NYAN_CAT = browser.runtime.getURL("images/nyan-cat.gif");
+const PUSHEEN = browser.runtime.getURL("images/pusheen.gif");
 const PIKACHU = browser.runtime.getURL("images/pikachu.gif");
 const CAPOO = browser.runtime.getURL("images/capoo.gif");
-const RAINBOW = `-webkit-gradient(linear, left top, left bottom,
-    color-stop(0.00, #f00), color-stop(17%, #f90), color-stop(33%, #ff0),
-    color-stop(50%, #3f0), color-stop(67%, #09f), color-stop(83%, #63f))`;
+const CHERRY_LOVE = `linear-gradient(
+          145deg,
+          hsl(0deg 95% 40%) 0%,
+          hsl(332deg 91% 43%) 8%,
+          hsl(322deg 89% 46%) 17%,
+          hsl(315deg 87% 49%) 25%,
+          hsl(314deg 83% 59%) 33%,
+          hsl(311deg 86% 64%) 42%,
+          hsl(307deg 90% 69%) 50%,
+          hsl(310deg 89% 70%) 58%,
+          hsl(312deg 89% 72%) 67%,
+          hsl(315deg 88% 73%) 75%,
+          hsl(313deg 87% 77%) 83%,
+          hsl(310deg 85% 81%) 92%,
+          hsl(306deg 82% 85%) 100%)`;
 const POKEBALL = "linear-gradient(to bottom, red 45%, grey 55%, white 100%)";
 const LIGHTBLUE = "#6cd3ff";
 
@@ -380,7 +392,7 @@ function listenForClicks() {
 
         function changeScrubberPattern(tabs, pat) {
             var pattern;
-            if (pat === "nyan-cat") pattern = NYAN_CAT;
+            if (pat === "pusheen") pattern = PUSHEEN;
             else if (pat === "pikachu") pattern = PIKACHU;
             else if (pat === "capoo") pattern = CAPOO;
             for (const tab of tabs) {
@@ -394,7 +406,7 @@ function listenForClicks() {
 
         function changeProgbarPattern(tabs, pat) {
             var pattern;
-            if (pat === "rainbow") pattern = RAINBOW;
+            if (pat === "cherry-love") pattern = CHERRY_LOVE;
             else if (pat === "pokeball") pattern = POKEBALL;
             else if (pat === "lightblue") pattern = LIGHTBLUE;
             for (const tab of tabs) {
