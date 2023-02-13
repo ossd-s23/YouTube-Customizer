@@ -13,7 +13,7 @@ const PUSHEEN = browser.runtime.getURL("images/pusheen.gif");
 const PIKACHU = browser.runtime.getURL("images/pikachu.gif");
 const CAPOO = browser.runtime.getURL("images/capoo.gif");
 const CHERRY_LOVE = `linear-gradient(
-          145deg,
+          0deg,
           hsl(0deg 95% 40%) 0%,
           hsl(332deg 91% 43%) 8%,
           hsl(322deg 89% 46%) 17%,
