@@ -11,6 +11,21 @@
 
     // ========== =========== ========== ========== ========== //
     //                                                         //
+    //                   DECLARING PATTERNS                    //
+    //                                                         //
+    // ========== =========== ========== ========== ========== //
+
+    const NYAN_CAT = browser.runtime.getURL("images/nyan-cat.gif");
+    const PIKACHU = browser.runtime.getURL("images/pikachu.gif");
+    const CAPOO = browser.runtime.getURL("images/capoo.gif");
+    const RAINBOW = `-webkit-gradient(linear, left top, left bottom,
+        color-stop(0.00, #f00), color-stop(17%, #f90), color-stop(33%, #ff0),
+        color-stop(50%, #3f0), color-stop(67%, #09f), color-stop(83%, #63f))`;
+    const POKEBALL = "linear-gradient(to bottom, red 45%, grey 55%, white 100%)";
+    const LIGHTBLUE = "#6cd3ff";
+
+    // ========== =========== ========== ========== ========== //
+    //                                                         //
     //             DECLARING CSS INJECTION SCRIPTS             //
     //                                                         //
     // ========== =========== ========== ========== ========== //
@@ -174,9 +189,18 @@
 
     // ==================== VIDEO PLAYER ===================== //
 
-    function CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(color) { return `
+    function CSS_SCRIPT_CHANGE_SCRUBBER_PATTERN(pattern) { return `
+        html .ytp-scrubber-container
+        { background: url(${pattern}) no-repeat; background-size: 36px;
+        width: 40px; height: 24px; margin-top: -3px; margin-left: -6px; }
+        html .ytp-scrubber-container:hover
+        { background-size: 40px; margin-top: -5px; margin-left: -8px; }
         html .ytp-scrubber-button
-        { background-color: ${color} !important; }
+        { display: none; }
+    `; }
+    function CSS_SCRIPT_CHANGE_PROGBAR_PATTERN(pattern) { return `
+        html .ytp-play-progress
+        { padding: 2.5px .5px; top: -2px; background: ${pattern}; }
     `; }
 
     // ========== =========== ========== ========== ========== //
@@ -339,13 +363,28 @@
 
     // ==================== VIDEO PLAYER ===================== //
 
-    browser.storage.local.get({change_color_progbar_text_state: ""}).then(result => {
-        const res = result.change_color_progbar_text_state;
-        if (res !== "default" && res !== "") insertCSSScript(CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(res), "css-script-change-color-progbar-text");
+    browser.storage.local.get({change_scrubber_pattern_state: ""}).then(result => {
+        const res = result.change_scrubber_pattern_state;
+        if (res !== "default" && res !== "") {
+            var pattern;
+            if (pat === "nyan-cat") pattern = NYAN_CAT;
+            else if (pat === "pikachu") pattern = PIKACHU;
+            else if (pat === "capoo") pattern = CAPOO;
+            insertCSSScript(CSS_SCRIPT_CHANGE_SCRUBBER_PATTERN(pattern), "css-script-change-scrubber-pattern");
+        }
+    })
+    browser.storage.local.get({change_progbar_pattern_state: ""}).then(result => {
+        const res = result.change_progbar_pattern_state;
+        if (res !== "default" && res !== "") {
+            var pattern;
+            if (pat === "rainbow") pattern = RAINBOW;
+            else if (pat === "pokeball") pattern = POKEBALL;
+            else if (pat === "lightblue") pattern = LIGHTBLUE;
+            insertCSSScript(CSS_SCRIPT_CHANGE_PROGBAR_PATTERN(pattern), "css-script-change-progbar-pattern");
+        }
     })
 
     propertiesOverride();
-
 
     // ========== =========== ========== ========== ========== //
     //                                                         //

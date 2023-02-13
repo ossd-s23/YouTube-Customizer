@@ -1,5 +1,20 @@
 // ========== =========== ========== ========== ========== //
 //                                                         //
+//                   DECLARING PATTERNS                    //
+//                                                         //
+// ========== =========== ========== ========== ========== //
+
+const NYAN_CAT = browser.runtime.getURL("images/nyan-cat.gif");
+const PIKACHU = browser.runtime.getURL("images/pikachu.gif");
+const CAPOO = browser.runtime.getURL("images/capoo.gif");
+const RAINBOW = `-webkit-gradient(linear, left top, left bottom,
+    color-stop(0.00, #f00), color-stop(17%, #f90), color-stop(33%, #ff0),
+    color-stop(50%, #3f0), color-stop(67%, #09f), color-stop(83%, #63f))`;
+const POKEBALL = "linear-gradient(to bottom, red 45%, grey 55%, white 100%)";
+const LIGHTBLUE = "#6cd3ff";
+
+// ========== =========== ========== ========== ========== //
+//                                                         //
 //             DECLARING CSS INJECTION SCRIPTS             //
 //                                                         //
 // ========== =========== ========== ========== ========== //
@@ -163,9 +178,18 @@ const CSS_SCRIPT_HIDE_NAVBAR_FOOTER = `
 
 // ==================== VIDEO PLAYER ===================== //
 
-function CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(color) { return `
+function CSS_SCRIPT_CHANGE_SCRUBBER_PATTERN(pattern) { return `
+    html .ytp-scrubber-container
+    { background: url(${pattern}) no-repeat; background-size: 36px;
+      width: 40px; height: 24px; margin-top: -3px; margin-left: -6px; }
+    html .ytp-scrubber-container:hover
+    { background-size: 40px; margin-top: -5px; margin-left: -8px; }
     html .ytp-scrubber-button
-    { background-color: ${color} !important; }
+    { display: none; }
+`; }
+function CSS_SCRIPT_CHANGE_PROGBAR_PATTERN(pattern) { return `
+    html .ytp-play-progress
+    { padding: 2.5px .5px; top: -2px; background: ${pattern}; }
 `; }
 
 // ========== =========== ========== ========== ========== //
@@ -233,8 +257,10 @@ function memorizeStates() {
 
     // ==================== VIDEO PLAYER ===================== //
 
-    browser.storage.local.get({change_color_progbar_text_state: ""})
-        .then(result => document.getElementById("change-color-progbar-text").value = result.change_color_progbar_text_state);
+    browser.storage.local.get({change_scrubber_pattern_state: ""})
+        .then(result => document.getElementById("change-scrubber-pattern").value = result.change_scrubber_pattern_state);
+    browser.storage.local.get({change_progbar_pattern_state: ""})
+        .then(result => document.getElementById("change-progbar-pattern").value = result.change_progbar_pattern_state);
 
 }
 
@@ -304,12 +330,30 @@ function listenForClicks() {
 
         // ================ VIDEO PLAYER SPECIAL ================= //
 
-        function changeColorProgbarText(tabs, color) {
+        function changeScrubberPattern(tabs, pat) {
+            var pattern;
+            if (pat === "nyan-cat") pattern = NYAN_CAT;
+            else if (pat === "pikachu") pattern = PIKACHU;
+            else if (pat === "capoo") pattern = CAPOO;
             for (const tab of tabs) {
                 browser.tabs.sendMessage(tab.id, {
                     command: "insert_css",
-                    description: "css-script-change-color-progbar-text",
-                    css_script: CSS_SCRIPT_CHANGE_COLOR_PROGBAR_TEXT(color),
+                    description: "css-script-change-scrubber-pattern",
+                    css_script: CSS_SCRIPT_CHANGE_SCRUBBER_PATTERN(pattern),
+                });
+            }
+        }
+
+        function changeProgbarPattern(tabs, pat) {
+            var pattern;
+            if (pat === "rainbow") pattern = RAINBOW;
+            else if (pat === "pokeball") pattern = POKEBALL;
+            else if (pat === "lightblue") pattern = LIGHTBLUE;
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-change-progbar-pattern",
+                    css_script: CSS_SCRIPT_CHANGE_PROGBAR_PATTERN(pattern),
                 });
             }
         }
@@ -581,15 +625,26 @@ function listenForClicks() {
 
         // ==================== VIDEO PLAYER ===================== //
 
-        else if (event.target.id === "change-color-progbar-text") {
+        else if (event.target.id === "change-scrubber-pattern") {
             var m = event.target.value;
-            const d = "css-script-change-color-progbar-text";
-            browser.storage.local.set({change_color_progbar_text_state: m});
+            const d = "css-script-change-scrubber-pattern";
+            browser.storage.local.set({change_scrubber_pattern_state: m});
             if (m === "default") browser.tabs.query({currentWindow: true})
                 .then(tabs => sendRemoveCSSMessage(tabs, d, ""))
                 .catch(reportError);
             else browser.tabs.query({currentWindow: true})
-                .then(tabs => changeColorProgbarText(tabs, m))
+                .then(tabs => changeScrubberPattern(tabs, m))
+                .catch(reportError);
+        }
+        else if (event.target.id === "change-progbar-pattern") {
+            var m = event.target.value;
+            const d = "css-script-change-progbar-pattern";
+            browser.storage.local.set({change_progbar_pattern_state: m});
+            if (m === "default") browser.tabs.query({currentWindow: true})
+                .then(tabs => sendRemoveCSSMessage(tabs, d, ""))
+                .catch(reportError);
+            else browser.tabs.query({currentWindow: true})
+                .then(tabs => changeProgbarPattern(tabs, m))
                 .catch(reportError);
         }
 

@@ -33,6 +33,12 @@
         "default_icon": "icons/icon-32.png",
         "default_title": "Customize YouTube Interface",
         "default_popup": "popup/options.html"
-    }
+    },
+
+    "web_accessible_resources": [
+        "images/nyan-cat.gif",
+        "images/pikachu.gif",
+        "images/capoo.gif"
+    ]
 
 }
