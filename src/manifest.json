@@ -36,9 +36,9 @@
     },
 
     "web_accessible_resources": [
-        "images/nyan-cat.gif",
         "images/pikachu.gif",
-        "images/capoo.gif"
+        "images/capoo.gif",
+ 	  "images/pusheen.gif"
     ]
 
 }
