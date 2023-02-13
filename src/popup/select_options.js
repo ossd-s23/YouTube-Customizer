@@ -4,6 +4,11 @@
 //                                                         //
 // ========== =========== ========== ========== ========== //
 
+const GENERAL_SCHEMES = [[],  // Medium, Lightest, Almost-black, Almost-white, Darkest
+    ["#a8dadc", "#f1faee", "#212121", "#ffffff", "#457b9d"],
+    ["#ffe7cc", "#fffbeb", "#212121", "#ffffff", "#d48747"],
+    ["#f8dbe3", "#fdf2f6", "#212121", "#ffffff", "#dc628d"],
+];
 const PUSHEEN = browser.runtime.getURL("images/pusheen.gif");
 const PIKACHU = browser.runtime.getURL("images/pikachu.gif");
 const CAPOO = browser.runtime.getURL("images/capoo.gif");
@@ -33,9 +38,9 @@ const LIGHTBLUE = "#6cd3ff";
 
 // ======================= GENERAL ======================= //
 
-const CSS_SCRIPT_TURN_SKYMODE_ON = `
+function CSS_SCRIPT_CHANGE_GENERAL_SCHEME(colors) { return `
     html #container.ytd-masthead
-    { background-color: #a8dadc; }
+    { background-color: ${colors[0]}; }
     html ytd-app,
     html ytd-app[darker-dark-theme],
     html #channel-header.ytd-c4-tabbed-header-renderer,
@@ -48,18 +53,18 @@ const CSS_SCRIPT_TURN_SKYMODE_ON = `
     html ytd-app[guide-refresh] ytd-mini-guide-renderer.ytd-app,
     html ytd-watch-flexy[flexy][is-two-columns_] #columns.ytd-watch-flexy,
     html ytd-feed-filter-chip-bar-renderer[darker-dark-theme] #chips-wrapper.ytd-feed-filter-chip-bar-renderer
-    { background-color: #f1faee; }
+    { background-color: ${colors[1]}; }
     html .guide-icon.ytd-mini-guide-entry-renderer,
     html ytd-mini-guide-entry-renderer[system-icons][is-active] .title.ytd-mini-guide-entry-renderer,
     html ytd-mini-guide-entry-renderer[system-icons] .title.ytd-mini-guide-entry-renderer,
     html tp-yt-paper-tab:not(.iron-selected) .tp-yt-paper-tab[style-target="tab-content"]
-    { color: #212121; }
+    { color: ${colors[2]}; }
     html yt-chip-cloud-chip-renderer[modern-chips][chip-style],
     html .header.ytd-playlist-panel-renderer
-    { background-color: #a8dadc; border: 1px solid #ffffff; }
+    { background-color: ${colors[0]}; border: 1px solid ${colors[3]}; }
     html yt-chip-cloud-chip-renderer[modern-chips][chip-style]
-    { background-color: #457b9d; color: #f1faee; }
-`;
+    { background-color: ${colors[4]}; color: ${colors[1]}; }
+`; }
 
 // ====================== HOMEPAGE ======================= //
 
@@ -248,8 +253,20 @@ function memorizeStates() {
     
     // ======================= GENERAL ======================= //
 
-    browser.storage.local.get({sky_mode_on_state: ""})
-        .then(result => document.getElementById("sky-mode-on").checked = !!result.sky_mode_on_state);
+    browser.storage.local.get({general_scheme_state: ""}).then(result => {
+        const res = result.general_scheme_state;
+        const grp = document.getElementsByName("general-scheme");
+        if (res === "") {
+            grp[0].checked = true;
+            for (i = 1; i < grp.length; i ++) grp[i].checked = false;
+        }
+        else {
+            for (i = 0; i < grp.length; i ++) {
+                if (i == parseInt(res)) grp[i].checked = true;
+                else grp[i].checked = false;
+            }
+        }
+    });
 
     // ====================== HOMEPAGE ======================= //
 
@@ -354,6 +371,18 @@ function listenForClicks() {
                 });
             }
         }
+
+        // =================== GENERAL SPECIAL =================== //
+
+        function changeGeneralScheme(tabs, colors) {
+            for (const tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {
+                    command: "insert_css",
+                    description: "css-script-change-general-scheme",
+                    css_script: CSS_SCRIPT_CHANGE_GENERAL_SCHEME(colors),
+                });
+            }
+        }
     
         // ================== HOMEPAGE SPECIAL =================== //
 
@@ -427,15 +456,19 @@ function listenForClicks() {
 
         // ====================== GENERAL ======================= //
 
-        if (event.target.id === "sky-mode-on"){
-            var m = event.target.checked;
-            const d = "css-script-turn-skymode-on";
-            browser.storage.local.set({sky_mode_on_state: m});
-            if (m) browser.tabs.query({currentWindow: true})
-                .then(tabs => sendInsertCSSMessage(tabs, d, CSS_SCRIPT_TURN_SKYMODE_ON))
+        if (event.target.name === "general-scheme") {
+            var m;
+            const d = "css-script-change-general-scheme";
+            if (event.target.id === "default-scheme") m = 0;
+            else if (event.target.id === "sky-scheme") m = 1;
+            else if (event.target.id === "earth-scheme") m = 2;
+            else if (event.target.id === "valentine-scheme") m = 3;
+            browser.storage.local.set({general_scheme_state: m});
+            if (m == 0) browser.tabs.query({currentWindow: true})
+                .then(tabs => sendRemoveCSSMessage(tabs, d, ""))
                 .catch(reportError);
             else browser.tabs.query({currentWindow: true})
-                .then(tabs => sendRemoveCSSMessage(tabs, d, CSS_SCRIPT_TURN_SKYMODE_ON))
+                .then(tabs => changeGeneralScheme(tabs, GENERAL_SCHEMES[m]))
                 .catch(reportError);
         }
 

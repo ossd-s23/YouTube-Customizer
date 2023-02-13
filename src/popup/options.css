@@ -111,3 +111,19 @@ html, body {
 .tabs_content h4 {
     font-size: 0.9rem;
 }
+
+.default-snippet-1 { background: #eeeeee; }
+.default-snippet-2 { background: #ffffff; }
+.default-snippet-3 { background: #ffffff; }
+
+.sky-snippet-1 { background: #457b9d; }
+.sky-snippet-2 { background: #a8dadc; }
+.sky-snippet-3 { background: #f1faee; }
+
+.earth-snippet-1 { background: #d48747; }
+.earth-snippet-2 { background: #ffe7cc; }
+.earth-snippet-3 { background: #fffbeb; }
+
+.valentine-snippet-1 { background: #dc628d; }
+.valentine-snippet-2 { background: #f8dbe3; }
+.valentine-snippet-3 { background: #fdf2f6; }

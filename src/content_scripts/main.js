@@ -15,6 +15,11 @@
     //                                                         //
     // ========== =========== ========== ========== ========== //
 
+    const GENERAL_SCHEMES = [[],  // Medium, Lightest, Almost-black, Almost-white, Darkest
+        ["#a8dadc", "#f1faee", "#212121", "#ffffff", "#457b9d"],
+        ["#ffe7cc", "#fffbeb", "#212121", "#ffffff", "#d48747"],
+        ["#f8dbe3", "#fdf2f6", "#212121", "#ffffff", "#dc628d"],
+    ];
     const PUSHEEN = browser.runtime.getURL("images/pusheen.gif");
     const PIKACHU = browser.runtime.getURL("images/pikachu.gif");
     const CAPOO = browser.runtime.getURL("images/capoo.gif");
@@ -44,9 +49,9 @@
 
     // ======================= GENERAL ======================= //
 
-    const CSS_SCRIPT_TURN_SKYMODE_ON = `
+    function CSS_SCRIPT_CHANGE_GENERAL_SCHEME(colors) { return `
         html #container.ytd-masthead
-        { background-color: #a8dadc; }
+        { background-color: ${colors[0]}; }
         html ytd-app,
         html ytd-app[darker-dark-theme],
         html #channel-header.ytd-c4-tabbed-header-renderer,
@@ -59,18 +64,18 @@
         html ytd-app[guide-refresh] ytd-mini-guide-renderer.ytd-app,
         html ytd-watch-flexy[flexy][is-two-columns_] #columns.ytd-watch-flexy,
         html ytd-feed-filter-chip-bar-renderer[darker-dark-theme] #chips-wrapper.ytd-feed-filter-chip-bar-renderer
-        { background-color: #f1faee; }
+        { background-color: ${colors[1]}; }
         html .guide-icon.ytd-mini-guide-entry-renderer,
         html ytd-mini-guide-entry-renderer[system-icons][is-active] .title.ytd-mini-guide-entry-renderer,
         html ytd-mini-guide-entry-renderer[system-icons] .title.ytd-mini-guide-entry-renderer,
         html tp-yt-paper-tab:not(.iron-selected) .tp-yt-paper-tab[style-target="tab-content"]
-        { color: #212121; }
+        { color: ${colors[2]}; }
         html yt-chip-cloud-chip-renderer[modern-chips][chip-style],
         html .header.ytd-playlist-panel-renderer
-        { background-color: #a8dadc; border: 1px solid #ffffff; }
+        { background-color: ${colors[0]}; border: 1px solid ${colors[3]}; }
         html yt-chip-cloud-chip-renderer[modern-chips][chip-style]
-        { background-color: #457b9d; color: #f1faee; }
-    `;
+        { background-color: ${colors[4]}; color: ${colors[1]}; }
+    `; }
 
     // ====================== HOMEPAGE ======================= //
 
@@ -328,8 +333,9 @@
 
     // ======================= GENERAL ======================= //
 
-    browser.storage.local.get({sky_mode_on_state: ""}).then(result => {
-        if (!!result.sky_mode_on_state) insertCSSScript(CSS_SCRIPT_TURN_SKYMODE_ON, "css-script-turn-skymode-on");
+    browser.storage.local.get({general_scheme_state: ""}).then(result => {
+        const res = result.general_scheme_state;
+        if (parseInt(res) != 0 && res !== "") insertCSSScript(CSS_SCRIPT_CHANGE_GENERAL_SCHEME(GENERAL_SCHEMES[parseInt(res)]), "css-script-change-general-scheme");
     });
 
     // ====================== HOMEPAGE ======================= //
