@@ -1,0 +1,7 @@
+html ytd-comment-action-buttons-renderer {
+    display: none !important;
+}
+
+html #replies.ytd-comment-thread-renderer {
+    display: none !important;
+}

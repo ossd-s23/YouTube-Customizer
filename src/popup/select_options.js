@@ -217,6 +217,14 @@ const CSS_SCRIPT_HIDE_ALL_COMMENTS = `
     html ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"]
     { display: none !important; }
 `;
+const CSS_SCRIPT_HIDE_COMMENT_ACTIONS = `
+    html ytd-comment-action-buttons-renderer
+    { display: none !important; }
+`;
+const CSS_SCRIPT_HIDE_COMMENT_REPLIES = `
+    html #replies.ytd-comment-thread-renderer
+    { display: none !important; }
+`;
 
 // ========== =========== ========== ========== ========== //
 //                                                         //
@@ -297,6 +305,10 @@ function memorizeStates() {
         .then(result => document.getElementById("hide-merch-shelf").checked = !!result.hide_merch_shelf_state);
     browser.storage.local.get({hide_all_comments_state: ""})
         .then(result => document.getElementById("hide-all-comments").checked = !!result.hide_all_comments_state);
+    browser.storage.local.get({hide_comment_actions_state: ""})
+        .then(result => document.getElementById("hide-comment-actions").checked = !!result.hide_comment_actions_state);
+    browser.storage.local.get({hide_comment_replies_state: ""})
+        .then(result => document.getElementById("hide-comment-replies").checked = !!result.hide_comment_replies_state);
 
 }
 
@@ -736,6 +748,28 @@ function listenForClicks() {
                 .catch(reportError);
             else browser.tabs.query({currentWindow: true})
                 .then(tabs => sendRemoveCSSMessage(tabs, d, CSS_SCRIPT_HIDE_ALL_COMMENTS))
+                .catch(reportError);
+        }
+        else if (event.target.id === "hide-comment-actions") {
+            var m = event.target.checked;
+            const d = "css-script-hide-comment-actions";
+            browser.storage.local.set({hide_comment_actions_state: m});
+            if (m) browser.tabs.query({currentWindow: true})
+                .then(tabs => sendInsertCSSMessage(tabs, d, CSS_SCRIPT_HIDE_COMMENT_ACTIONS))
+                .catch(reportError);
+            else browser.tabs.query({currentWindow: true})
+                .then(tabs => sendRemoveCSSMessage(tabs, d, CSS_SCRIPT_HIDE_COMMENT_ACTIONS))
+                .catch(reportError);
+        }
+        else if (event.target.id === "hide-comment-replies") {
+            var m = event.target.checked;
+            const d = "css-script-hide-comment-replies";
+            browser.storage.local.set({hide_comment_replies_state: m});
+            if (m) browser.tabs.query({currentWindow: true})
+                .then(tabs => sendInsertCSSMessage(tabs, d, CSS_SCRIPT_HIDE_COMMENT_REPLIES))
+                .catch(reportError);
+            else browser.tabs.query({currentWindow: true})
+                .then(tabs => sendRemoveCSSMessage(tabs, d, CSS_SCRIPT_HIDE_COMMENT_REPLIES))
                 .catch(reportError);
         }
 

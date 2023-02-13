@@ -228,6 +228,14 @@
         html ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"]
         { display: none !important; }
     `;
+    const CSS_SCRIPT_HIDE_COMMENT_ACTIONS = `
+        html ytd-comment-action-buttons-renderer
+        { display: none !important; }
+    `;
+    const CSS_SCRIPT_HIDE_COMMENT_REPLIES = `
+        html #replies.ytd-comment-thread-renderer
+        { display: none !important; }
+    `;
 
     // ========== =========== ========== ========== ========== //
     //                                                         //
@@ -423,6 +431,12 @@
     });
     browser.storage.local.get({hide_all_comments_state: ""}).then(result => {
         if (!!result.hide_all_comments_state) insertCSSScript(CSS_SCRIPT_HIDE_ALL_COMMENTS, "css-script-hide-all-comments");
+    });
+    browser.storage.local.get({hide_comment_actions_state: ""}).then(result => {
+        if (!!result.hide_comment_actions_state) insertCSSScript(CSS_SCRIPT_HIDE_COMMENT_ACTIONS, "css-script-hide-comment-actions");
+    });
+    browser.storage.local.get({hide_comment_replies_state: ""}).then(result => {
+        if (!!result.hide_comment_replies_state) insertCSSScript(CSS_SCRIPT_HIDE_COMMENT_REPLIES, "css-script-hide-comment-replies");
     });
 
     propertiesOverride();
