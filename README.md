@@ -9,7 +9,7 @@
     </p>
 </div>
 
-This extension allows you to enhance your Youtube experience by customizing various features of the site. You can easily hide the navigation bar, remove ads, choose from a range of color templates, and so on.
+This extension allows you to customize a wide variety elements of the YouTube interface in your favor.
 
 
 ## Features
@@ -19,7 +19,7 @@ Detailed descriptions of the features can be found [here](https://charlie-xiao.g
 - **General**: Customize color scheme.
 - **Homepage**: Hide video suggestions; Customize homepage layout.
 - **Navigation bar**: Customize color; Redirect YouTube logo; Hide buttons and sections.
-- **Video player**: Customize color.
+- **Video player**: Customize the scrubber and progress bar.
 
 ## Installation
 

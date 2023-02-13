@@ -202,6 +202,32 @@
         html .ytp-play-progress
         { padding: 2.5px .5px; top: -2px; background: ${pattern}; }
     `; }
+    const CSS_SCRIPT_HIDE_SIDEBAR_SUGGESTIONS = `
+        html #secondary,
+        html #related
+        { display: none !important; }
+        html ytd-watch-flexy[flexy][is-two-columns_]:not([fullscreen]):not([theater])
+        { --ytd-watch-flexy-max-player-width: calc(var(--ytd-watch-flexy-chat-max-height)*var(--ytd-watch-flexy-width-ratio)/var(--ytd-watch-flexy-height-ratio)) !important; }
+    `;
+    const CSS_SCRIPT_HIDE_ENDOFVID_SUGGESTIONS = `
+        html .html5-endscreen
+        { display: none !important; }
+    `
+    const CSS_SCRIPT_HIDE_LIKE_AND_MORE = `
+        html #menu-container,
+        html #actions
+        { display: none !important; }
+    `;
+    const CSS_SCRIPT_HIDE_MERCH_SHELF = `
+        html ytd-merch-shelf-renderer
+        { display: none !important; }
+    `;
+    const CSS_SCRIPT_HIDE_ALL_COMMENTS = `
+        html #comments,
+        html #comment-teaser,
+        html ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"]
+        { display: none !important; }
+    `;
 
     // ========== =========== ========== ========== ========== //
     //                                                         //
@@ -383,6 +409,21 @@
             insertCSSScript(CSS_SCRIPT_CHANGE_PROGBAR_PATTERN(pattern), "css-script-change-progbar-pattern");
         }
     })
+    browser.storage.local.get({hide_sidebar_suggestions_state: ""}).then(result => {
+        if (!!result.hide_sidebar_suggestions_state) insertCSSScript(CSS_SCRIPT_HIDE_SIDEBAR_SUGGESTIONS, "css-script-hide-sidebar-suggestions");
+    });
+    browser.storage.local.get({hide_endofvid_suggestions_state: ""}).then(result => {
+        if (!!result.hide_endofvid_suggestions_state) insertCSSScript(CSS_SCRIPT_HIDE_ENDOFVID_SUGGESTIONS, "css-script-hide-endofvid-suggestions");
+    });
+    browser.storage.local.get({hide_like_and_more_state: ""}).then(result => {
+        if (!!result.hide_like_and_more_state) insertCSSScript(CSS_SCRIPT_HIDE_LIKE_AND_MORE, "css-script-hide-like-and-more");
+    });
+    browser.storage.local.get({hide_merch_shelf_state: ""}).then(result => {
+        if (!!result.hide_merch_shelf_state) insertCSSScript(CSS_SCRIPT_HIDE_MERCH_SHELF, "css-script-hide-merch-shelf");
+    });
+    browser.storage.local.get({hide_all_comments_state: ""}).then(result => {
+        if (!!result.hide_all_comments_state) insertCSSScript(CSS_SCRIPT_HIDE_ALL_COMMENTS, "css-script-hide-all-comments");
+    });
 
     propertiesOverride();
 
