@@ -9,7 +9,7 @@
     </p>
 </div>
 
-This extension allows you to customize a wide variety elements of the YouTube interface in your favor.
+This is an open source extension that allows you to customize a wide variety of elements of the YouTube interface in your favor.
 
 
 ## Features
