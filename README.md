@@ -14,7 +14,7 @@ This is an open source extension that allows you to customize a wide variety of 
 
 ## Features
 
-Detailed descriptions of the features can be found [here](https://charlie-xiao.github.io/education/YouTube-Interface-Customizer.html). Below is an outline of the features:
+Detailed descriptions of the features can be found [here](https://charlie-xiao.github.io/projects/YouTube-Interface-Customizer.html). Below is an outline of the features:
 
 - **General**: Customize color theme.
 - **Homepage**: Hide video suggestions; Customize homepage layout.
